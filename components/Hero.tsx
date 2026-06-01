@@ -2,7 +2,7 @@
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-24 pt-32">
       {/* BG effects */}
       <div className="absolute inset-0 bg-[#0a0a0a] bg-grid" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[700px] bg-[#7c3aed]/10 rounded-full blur-[140px] pointer-events-none" />

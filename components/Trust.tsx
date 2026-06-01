@@ -1,7 +1,11 @@
+import Image from 'next/image'
 export default function Trust() {
   return (
     <section className="py-16 px-4 bg-[#111111] border-t border-[#1a1a1a]">
       <div className="max-w-3xl mx-auto text-center">
+        <div className="flex justify-center mb-6">
+          <Image src="/logo-sscdigital.svg" alt="SSCDigital" width={140} height={32} />
+        </div>
         <p className="text-gray-600 text-sm mb-6">Compra 100% segura</p>
         <div className="flex flex-wrap items-center justify-center gap-6 mb-8 text-sm text-gray-500">
           <span className="flex items-center gap-2">🔒 SSL · Pagamento criptografado</span>

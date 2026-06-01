@@ -6,7 +6,6 @@ const faqs = [
   { q: 'Como recebo os arquivos após a compra?', a: 'Acesso liberado imediatamente após a confirmação do pagamento. Você recebe e-mail com link de acesso à área de membros.' },
   { q: 'O que são "fluxos" exatamente?', a: 'São arquivos .md com instruções estruturadas, contexto e perguntas-guia para uma tarefa específica. Você cola no Claude e ele trabalha como especialista naquele tema.' },
   { q: 'Posso usar para clientes?', a: 'Sim, uso profissional próprio é autorizado. Você pode usar os fluxos para entregar trabalhos para clientes. Redistribuição ou revenda dos arquivos não é permitida.' },
-  { q: 'Os fluxos terão atualização?', a: 'Sim. Compradores recebem atualizações futuras sem custo adicional.' },
   { q: 'Já uso ChatGPT — vale para o Claude?', a: 'Os fluxos são desenvolvidos e otimizados para o Claude especificamente. Alguns funcionam no ChatGPT, mas o resultado é melhor no Claude.' },
   { q: 'E se eu não gostar?', a: 'Garantia incondicional de 7 dias. Se não ver valor, solicite reembolso por e-mail e devolveremos 100% do valor sem burocracia.' },
 ]
