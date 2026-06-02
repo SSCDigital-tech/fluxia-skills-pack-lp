@@ -58,6 +58,14 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Scroll hint */}
+        <div className="flex flex-col items-center mb-8 opacity-40">
+          <span className="text-gray-500 text-xs mb-2 tracking-widest uppercase">veja mais</span>
+          <svg className="animate-bounce w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+
         {/* Mockup */}
         <div className="max-w-2xl mx-auto bg-[#111111] border border-[#7c3aed]/20 rounded-2xl p-6 glow">
           <div className="flex items-center gap-2 mb-4">

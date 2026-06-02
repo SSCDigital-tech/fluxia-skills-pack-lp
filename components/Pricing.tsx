@@ -22,6 +22,10 @@ export default function Pricing() {
             Tudo isso por <span className="gradient-text-gold">R$47</span>
           </h2>
           <p className="text-gray-400">Pagamento único. Sem mensalidade. Acesso vitalício.</p>
+          <div className="inline-flex items-center gap-2 mt-4 bg-[#facc15]/8 border border-[#facc15]/20 rounded-full px-4 py-2 text-sm text-[#facc15] font-medium">
+            <span className="w-1.5 h-1.5 bg-[#facc15] rounded-full animate-pulse" />
+            Preço de lançamento — pode subir a qualquer momento
+          </div>
         </div>
 
         {/* Value table */}
@@ -54,7 +58,7 @@ export default function Pricing() {
                 <span className="text-[#a78bfa]">🎁</span>
                 <div>
                   <span className="text-gray-200 text-sm font-medium">{b.name}</span>
-                  <p className="text-gray-600 text-xs">{b.sub}</p>
+                  <p className="text-gray-500 text-xs">{b.sub}</p>
                 </div>
               </div>
             ))}

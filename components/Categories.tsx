@@ -29,7 +29,7 @@ export default function Categories() {
             <div key={c.name} className="card-border p-5 hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/5 transition-all duration-200 cursor-default">
               <div className="text-3xl mb-3">{c.icon}</div>
               <div className="text-sm font-semibold text-white leading-tight mb-2">{c.name}</div>
-              <div className="text-xs text-gray-600">{c.n} fluxos</div>
+              <div className="text-xs text-gray-500">{c.n} fluxos</div>
             </div>
           ))}
         </div>
