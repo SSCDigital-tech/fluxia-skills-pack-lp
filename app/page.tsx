@@ -23,9 +23,9 @@ export default function Home() {
       <SocialProof />
       <ForWhom />
       <Pricing />
-      <Trust />
       <FAQ />
       <FinalCTA />
+      <Trust />
     </main>
   )
 }
