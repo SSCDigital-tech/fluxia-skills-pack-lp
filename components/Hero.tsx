@@ -1,5 +1,20 @@
 'use client'
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
+
+function trackCheckout() {
+  type FbqWindow = Window & { fbq?: (...args: unknown[]) => void }
+  const fbq = (window as FbqWindow).fbq
+  if (typeof fbq === 'function') {
+    fbq('track', 'InitiateCheckout', {
+      value: 47.00,
+      currency: 'BRL',
+      content_name: 'FluxIA Skills Pack',
+      content_type: 'product',
+      num_items: 1,
+    })
+  }
+}
+
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-24 pt-32">
@@ -44,6 +59,7 @@ export default function Hero() {
         <div className="flex flex-col items-center gap-4 mb-10">
           <a
             href={CHECKOUT_URL}
+            onClick={trackCheckout}
             className="inline-flex items-center gap-4 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl px-12 py-6 rounded-2xl transition-all duration-200 pulse-glow hover:scale-105"
             target="_blank" rel="noopener noreferrer"
           >

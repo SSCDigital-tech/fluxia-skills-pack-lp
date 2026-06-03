@@ -1,5 +1,19 @@
 'use client'
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
+
+function trackCheckout() {
+  type FbqWindow = Window & { fbq?: (...args: unknown[]) => void }
+  const fbq = (window as FbqWindow).fbq
+  if (typeof fbq === 'function') {
+    fbq('track', 'InitiateCheckout', {
+      value: 47.00,
+      currency: 'BRL',
+      content_name: 'FluxIA Skills Pack',
+      content_type: 'product',
+      num_items: 1,
+    })
+  }
+}
 const valueRows = [
   { item: 'Copywriting e ofertas (10 fluxos)', value: 'R$500' },
   { item: 'Tráfego pago e criativos (10 fluxos)', value: 'R$480' },
@@ -83,6 +97,7 @@ export default function Pricing() {
 
           <a
             href={CHECKOUT_URL}
+            onClick={trackCheckout}
             className="block w-full text-center bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl py-5 rounded-2xl transition-all duration-200 hover:scale-105 pulse-glow"
             target="_blank" rel="noopener noreferrer"
           >
