@@ -15,16 +15,16 @@ function trackCheckout() {
   }
 }
 const valueRows = [
-  { item: 'Copywriting e ofertas (10 fluxos)', value: 'R$500' },
-  { item: 'Tráfego pago e criativos (10 fluxos)', value: 'R$480' },
-  { item: 'Instagram e conteúdo (10 fluxos)', value: 'R$350' },
-  { item: 'Vendas e WhatsApp (10 fluxos)', value: 'R$400' },
-  { item: '+ 80 fluxos adicionais (8 categorias)', value: 'R$910' },
+  { item: 'Conteúdo e Copy (210 skills)', value: 'R$700' },
+  { item: 'Marketing e Publicidade (222 skills)', value: 'R$720' },
+  { item: 'Operações e Gestão (245 skills)', value: 'R$600' },
+  { item: 'Rotina e Organização (90 skills)', value: 'R$350' },
+  { item: '+ 400 skills em 10 categorias adicionais', value: 'R$1.110' },
 ]
 const bonuses = [
   { icon: '📖', name: 'Guia de instalação completo', sub: 'Claude.ai + Claude Code — passo a passo' },
-  { icon: '📋', name: 'Catálogo de 120 fluxos', sub: 'Índice completo com descrição de cada fluxo' },
-  { icon: '📅', name: 'Plano de 7 dias de uso', sub: 'Do zero ao fluxo instalado em uma semana' },
+  { icon: '📋', name: 'Catálogo completo de 1.166 skills', sub: 'Índice com nome e descrição de cada skill' },
+  { icon: '📅', name: 'Plano de 7 dias de uso', sub: 'Do zero à skill instalada em uma semana' },
 ]
 export default function Pricing() {
   return (
@@ -55,7 +55,7 @@ export default function Pricing() {
           ))}
           <div className="flex items-center justify-between px-6 py-4 bg-[#7c3aed]/8 border-t border-[#7c3aed]/20">
             <span className="font-bold text-white">Valor total</span>
-            <span className="text-gray-500 line-through font-bold">R$2.640</span>
+            <span className="text-gray-500 line-through font-bold">R$3.480</span>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default function Pricing() {
           <div className="space-y-3 mb-8">
             <div className="flex items-center gap-3">
               <span className="text-[#22c55e]">✓</span>
-              <span className="text-white font-semibold">FluxIA Skills Pack — 120 fluxos profissionais</span>
+              <span className="text-white font-semibold">FluxIA Skills Pack — 1.166 Skills Profissionais</span>
             </div>
             {bonuses.map((b) => (
               <div key={b.name} className="flex items-start gap-3">
@@ -81,7 +81,7 @@ export default function Pricing() {
           <div className="border-t border-[#2a2a2a] pt-6 mb-8">
             <div className="flex items-center justify-between mb-1">
               <span className="text-gray-500">Valor total</span>
-              <span className="text-gray-600 line-through">R$2.640</span>
+              <span className="text-gray-600 line-through">R$3.480</span>
             </div>
             <div className="flex items-end justify-between">
               <span className="text-white font-bold text-lg">Preço de lançamento</span>
@@ -101,7 +101,7 @@ export default function Pricing() {
             className="block w-full text-center bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl py-5 rounded-2xl transition-all duration-200 hover:scale-105 pulse-glow"
             target="_blank" rel="noopener noreferrer"
           >
-            🚀 Quero meus fluxos agora — R$47
+            🚀 Quero minhas skills agora — R$47
           </a>
           <p className="text-center text-gray-600 text-sm mt-4">
             Acesso imediato · Garantia de 7 dias · Pagamento 100% seguro via Kiwify

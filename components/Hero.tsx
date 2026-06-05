@@ -27,7 +27,7 @@ export default function Hero() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-[#7c3aed]/15 border border-[#7c3aed]/35 rounded-full px-5 py-2 mb-10 text-sm font-semibold text-[#a78bfa] tracking-wide">
           <span className="w-2 h-2 bg-[#a78bfa] rounded-full animate-pulse" />
-          120 Fluxos Profissionais · PT-BR Nativo · Acesso Imediato
+          1.166 Skills Profissionais · PT-BR Nativo · Acesso Imediato
         </div>
 
         {/* Headline */}
@@ -40,15 +40,15 @@ export default function Hero() {
 
         {/* Sub */}
         <p className="text-xl md:text-2xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-          120 fluxos profissionais organizados por área — marketing, vendas,
-          conteúdo, automação e mais. Em PT-BR. Prontos para usar hoje.
+          1.166 skills profissionais organizadas por área — marketing, copy, vendas,
+          gestão, automação e muito mais. Em PT-BR. Prontas para usar hoje.
         </p>
 
         {/* Social proof mini */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-10 text-sm text-gray-500">
-          <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> 120 fluxos</span>
+          <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> 1.166 skills</span>
           <span className="text-gray-700">·</span>
-          <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> 12 categorias</span>
+          <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> 14 categorias</span>
           <span className="text-gray-700">·</span>
           <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> PT-BR nativo</span>
           <span className="text-gray-700">·</span>
@@ -63,7 +63,7 @@ export default function Hero() {
             className="inline-flex items-center gap-4 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl px-12 py-6 rounded-2xl transition-all duration-200 pulse-glow hover:scale-105"
             target="_blank" rel="noopener noreferrer"
           >
-            Quero meus fluxos agora
+            Quero minhas skills agora
             <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-3 py-1 rounded-lg">R$47</span>
           </a>
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-600">

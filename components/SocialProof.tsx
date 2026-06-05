@@ -11,7 +11,7 @@ const personas = [
     avatarColor: 'from-[#2563eb] to-[#7c3aed]',
     name: 'Camila S.',
     role: 'Gestora de Tráfego Pago · RJ',
-    result: 'Gerei 20 variações de copy para anúncios em 2 horas. O CTR médio das campanhas subiu depois que instalei os fluxos. Uso todo dia.',
+    result: 'Gerei 20 variações de copy para anúncios em 2 horas. O CTR médio das campanhas subiu depois que instalei as skills. Uso todo dia.',
   },
   {
     initials: 'TA',
@@ -54,11 +54,11 @@ export default function SocialProof() {
         </div>
         <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto text-center">
           <div>
-            <div className="text-4xl font-extrabold gradient-text mb-1">120</div>
-            <div className="text-sm text-gray-500">fluxos profissionais</div>
+            <div className="text-4xl font-extrabold gradient-text mb-1">1.166</div>
+            <div className="text-sm text-gray-500">skills profissionais</div>
           </div>
           <div>
-            <div className="text-4xl font-extrabold gradient-text mb-1">12</div>
+            <div className="text-4xl font-extrabold gradient-text mb-1">14</div>
             <div className="text-sm text-gray-500">categorias de negócio</div>
           </div>
           <div>

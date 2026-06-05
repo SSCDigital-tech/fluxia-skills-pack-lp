@@ -1,4 +1,20 @@
-﻿export default function Obrigado() {
+﻿'use client'
+import { useEffect } from 'react'
+
+export default function Obrigado() {
+  useEffect(() => {
+    type FbqWindow = Window & { fbq?: (...args: unknown[]) => void }
+    const fbq = (window as FbqWindow).fbq
+    if (typeof fbq === 'function') {
+      fbq('track', 'Purchase', {
+        value: 47.00,
+        currency: 'BRL',
+        content_name: 'FluxIA Skills Pack',
+        content_type: 'product',
+      })
+    }
+  }, [])
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">
       <div className="max-w-xl mx-auto text-center">

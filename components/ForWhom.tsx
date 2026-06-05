@@ -7,7 +7,7 @@ const isFor = [
   'Quem quer sair do improviso e ter método com IA',
 ]
 const notFor = [
-  'Quem busca resultado mágico sem aplicar o fluxo',
+  'Quem busca resultado mágico sem aplicar a skill',
   'Quem nunca abriu o Claude na vida',
   'Quem quer um agente de IA 100% autônomo',
   'Quem não trabalha com marketing, conteúdo ou vendas',

@@ -2,8 +2,8 @@
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 export default function Solution() {
   const passos = [
-    { num: '01', title: 'Escolha a área', desc: '12 categorias organizadas por tipo de trabalho — copy, tráfego, vendas, conteúdo e mais.' },
-    { num: '02', title: 'Abra o fluxo', desc: 'Instruções prontas, contexto completo, perguntas certas. O Claude já sabe o que fazer.' },
+    { num: '01', title: 'Escolha a área', desc: '14 categorias organizadas por tipo de trabalho — copy, marketing, vendas, gestão, automação e mais.' },
+    { num: '02', title: 'Abra a skill', desc: 'Instruções prontas, contexto completo, prompt especializado. O Claude já sabe o que fazer.' },
     { num: '03', title: 'Cole e use', desc: 'Resultado profissional imediato. Sem setup técnico, sem programar, sem tentar e errar.' },
   ]
   return (
@@ -16,7 +16,7 @@ export default function Solution() {
             <span className="gradient-text">Você só usa.</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Cada fluxo do FluxIA é um arquivo estruturado que você cola no Claude
+            Cada skill do FluxIA é um arquivo estruturado que você cola no Claude
             e ele passa a trabalhar como um profissional treinado para aquela tarefa.
           </p>
         </div>

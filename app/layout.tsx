@@ -5,12 +5,12 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'FluxIA Skills Pack — 120 Skills Profissionais para o Claude',
-  description: 'Instale uma equipe de IA no Claude. 120 skills profissionais para conteúdo, copywriting, vendas, lançamentos e automação. Para criadores e empreendedores brasileiros.',
-  keywords: 'claude skills, skills para claude, ia brasil, prompts profissionais, automação ia, conteúdo instagram',
+  title: 'FluxIA Skills Pack — 1.166 Skills Profissionais para o Claude',
+  description: 'O maior pack de skills para o Claude em pt-BR. 1.166 skills profissionais em 14 categorias — marketing, copy, vendas, gestão, automação e muito mais. Para criadores e empreendedores brasileiros.',
+  keywords: 'claude skills, skills para claude, ia brasil, prompts profissionais, automação ia, conteúdo instagram, pack skills claude, 1166 skills',
   openGraph: {
     title: 'FluxIA Skills Pack',
-    description: '120 skills profissionais para o Claude',
+    description: '1.166 skills profissionais para o Claude em pt-BR',
     type: 'website',
     locale: 'pt_BR',
   },

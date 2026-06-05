@@ -27,7 +27,7 @@ export default function FinalCTA() {
           <span className="gradient-text">Instale método hoje.</span>
         </h2>
         <p className="text-xl text-gray-400 mb-10 max-w-xl mx-auto">
-          120 fluxos prontos · PT-BR nativo · 12 categorias
+          1.166 skills prontas · PT-BR nativo · 14 categorias
         </p>
         <div className="flex flex-col items-center gap-5">
           <a
@@ -36,7 +36,7 @@ export default function FinalCTA() {
             className="inline-flex items-center gap-4 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl px-14 py-7 rounded-2xl transition-all duration-200 pulse-glow hover:scale-105"
             target="_blank" rel="noopener noreferrer"
           >
-            Quero meus fluxos agora
+            Quero minhas skills agora
             <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-4 py-1.5 rounded-lg">R$47</span>
           </a>
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-600">

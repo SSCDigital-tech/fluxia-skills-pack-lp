@@ -1,5 +1,5 @@
 const rows = [
-  { sem: 'Prompt genérico digitado no vácuo', com: 'Fluxo estruturado com contexto completo' },
+  { sem: 'Prompt genérico digitado no vácuo', com: 'Skill estruturada com contexto completo' },
   { sem: 'Resultado imprevisível a cada uso', com: 'Output profissional e consistente' },
   { sem: 'Começa do zero toda vez', com: 'Biblioteca organizada por área' },
   { sem: 'Adapta por tentativa e erro', com: 'Instruções testadas e prontas' },
@@ -34,7 +34,7 @@ export default function Comparison() {
           ))}
         </div>
         <p className="text-center text-sm text-gray-600 mt-6">
-          Diferente de outros packs, FluxIA não são prompts soltos — são fluxos com contexto, estrutura e instruções completas para cada área.
+          Diferente de outros packs, FluxIA não são prompts soltos — são skills com contexto, estrutura e instruções completas para cada área.
         </p>
       </div>
     </section>
