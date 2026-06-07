@@ -1,3 +1,5 @@
+import Reveal from './Reveal'
+
 export default function Problem() {
   const dores = [
     {
@@ -32,19 +34,26 @@ export default function Problem() {
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
-          {dores.map((d) => (
-            <div key={d.title} className="card-border p-8">
-              <div className="text-4xl mb-4">{d.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3">{d.title}</h3>
-              <p className="text-gray-400 leading-relaxed">{d.desc}</p>
-            </div>
+          {dores.map((d, i) => (
+            <Reveal key={d.title} delay={i * 100}>
+              <div className="card-border card-hover p-8 h-full">
+                <div className="text-4xl mb-4">{d.icon}</div>
+                <h3 className="text-xl font-bold text-white mb-3">{d.title}</h3>
+                <p className="text-gray-400 leading-relaxed">{d.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
-        <div className="mt-12 text-center">
-          <p className="text-lg text-[#a78bfa] font-semibold">
-            O problema não é o Claude. É a falta de método. →
-          </p>
-        </div>
+        <Reveal delay={300}>
+          <div className="mt-12 text-center space-y-3">
+            <p className="text-lg text-[#a78bfa] font-semibold">
+              O problema não é o Claude. É a falta de método. →
+            </p>
+            <p className="text-sm text-gray-500 max-w-xl mx-auto">
+              Cada dia sem método é mais um dia recomeçando do zero — enquanto quem já instalou o fluxo está economizando horas e entregando mais.
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

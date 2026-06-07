@@ -10,7 +10,15 @@ const faqs = [
   { q: 'E se eu não gostar?', a: 'Garantia incondicional de 7 dias. Se não ver valor, solicite reembolso por e-mail e devolveremos 100% do valor sem burocracia.' },
 ]
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(null)
+  const [open, setOpen] = useState<Set<number>>(new Set([2, 6]))
+  const toggle = (i: number) => {
+    setOpen((prev) => {
+      const next = new Set(prev)
+      if (next.has(i)) next.delete(i)
+      else next.add(i)
+      return next
+    })
+  }
   return (
     <section className="py-24 px-4 bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto">
@@ -23,12 +31,12 @@ export default function FAQ() {
             <div key={i} className="card-border overflow-hidden">
               <button
                 className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
-                onClick={() => setOpen(open === i ? null : i)}
+                onClick={() => toggle(i)}
               >
                 <span className="text-white font-semibold">{f.q}</span>
-                <span className={`text-[#7c3aed] flex-shrink-0 transition-transform duration-200 ${open === i ? 'rotate-45' : ''}`}>+</span>
+                <span className={`text-[#7c3aed] flex-shrink-0 transition-transform duration-200 ${open.has(i) ? 'rotate-45' : ''}`}>+</span>
               </button>
-              {open === i && (
+              {open.has(i) && (
                 <div className="px-6 pb-5 text-gray-400 text-sm leading-relaxed border-t border-[#1a1a1a] pt-4">
                   {f.a}
                 </div>

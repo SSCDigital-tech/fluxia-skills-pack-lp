@@ -10,6 +10,7 @@ import Pricing from '@/components/Pricing'
 import Trust from '@/components/Trust'
 import FAQ from '@/components/FAQ'
 import FinalCTA from '@/components/FinalCTA'
+import StickyCTA from '@/components/StickyCTA'
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <FAQ />
       <FinalCTA />
       <Trust />
+      <StickyCTA />
     </main>
   )
 }

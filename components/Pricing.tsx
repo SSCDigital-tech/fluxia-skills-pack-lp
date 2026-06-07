@@ -1,4 +1,7 @@
 'use client'
+import Reveal from './Reveal'
+import Counter from './Counter'
+
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
 function trackCheckout() {
@@ -38,11 +41,12 @@ export default function Pricing() {
           <p className="text-gray-400">Pagamento único. Sem mensalidade. Acesso vitalício.</p>
           <div className="inline-flex items-center gap-2 mt-4 bg-[#facc15]/8 border border-[#facc15]/20 rounded-full px-4 py-2 text-sm text-[#facc15] font-medium">
             <span className="w-1.5 h-1.5 bg-[#facc15] rounded-full animate-pulse" />
-            Preço de lançamento — pode subir a qualquer momento
+            Fase de lançamento: R$47 — valor sobe assim que o lote inicial fechar
           </div>
         </div>
 
         {/* Value table */}
+        <Reveal>
         <div className="rounded-2xl overflow-hidden border border-[#2a2a2a] mb-6">
           <div className="bg-[#7c3aed]/12 px-6 py-3 border-b border-[#7c3aed]/20 text-xs font-bold text-[#a78bfa] uppercase tracking-wider flex justify-between">
             <span>O que você leva</span><span>Valor de mercado</span>
@@ -58,9 +62,11 @@ export default function Pricing() {
             <span className="text-gray-500 line-through font-bold">R$3.480</span>
           </div>
         </div>
+        </Reveal>
 
         {/* Offer card */}
-        <div className="bg-[#111111] border-2 border-[#7c3aed]/50 rounded-2xl p-8 glow-strong">
+        <Reveal delay={150}>
+        <div className="bg-[#111111] border-2 border-[#7c3aed]/50 rounded-2xl p-8 glow-strong card-hover">
           <p className="text-sm text-gray-500 uppercase tracking-wider mb-5">Você leva hoje:</p>
           <div className="space-y-3 mb-8">
             <div className="flex items-center gap-3">
@@ -88,7 +94,7 @@ export default function Pricing() {
               <div className="text-right">
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-[#facc15]">R$</span>
-                  <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}>47</span>
+                  <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}><Counter to={47} /></span>
                 </div>
                 <p className="text-gray-600 text-xs">ou 12x R$4,27</p>
               </div>
@@ -118,6 +124,7 @@ export default function Pricing() {
             </div>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   )
