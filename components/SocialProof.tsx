@@ -17,7 +17,7 @@ const proofPoints = [
   {
     icon: '💰',
     color: 'from-[#2563eb] to-[#7c3aed]',
-    title: 'R$3.480 em valor de mercado por R$47',
+    title: 'R$3.480 em valor de mercado por R$97',
     detail: 'Comparação calculada item a item na seção de oferta abaixo — não é estimativa solta, é soma do preço de mercado de cada categoria.',
   },
 ]

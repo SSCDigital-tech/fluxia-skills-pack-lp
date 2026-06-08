@@ -40,7 +40,7 @@ export default function StickyCTA() {
         className="inline-flex items-center gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-sm px-5 py-3 rounded-xl transition-all duration-200 flex-shrink-0"
         target="_blank" rel="noopener noreferrer"
       >
-        Quero — <span className="text-[#facc15]">R$47</span>
+        Quero — <span className="text-[#facc15]">R$97</span>
       </a>
     </div>
   )

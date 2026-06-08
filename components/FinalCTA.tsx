@@ -37,7 +37,7 @@ export default function FinalCTA() {
             target="_blank" rel="noopener noreferrer"
           >
             Quero minhas skills agora
-            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-4 py-1.5 rounded-lg">R$47</span>
+            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-4 py-1.5 rounded-lg">R$97</span>
           </a>
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-600">
             <span>🔒 Pagamento seguro</span>

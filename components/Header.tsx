@@ -9,7 +9,7 @@ export default function Header() {
           className="bg-[#7c3aed] hover:bg-[#6d28d9] text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-all duration-200"
           target="_blank" rel="noopener noreferrer"
         >
-          Quero por R$47 →
+          Quero por R$97 →
         </a>
       </div>
     </header>
