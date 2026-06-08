@@ -1,4 +1,19 @@
-﻿export default function Obrigado() {
+﻿'use client'
+import { useEffect } from 'react'
+
+export default function Obrigado() {
+  useEffect(() => {
+    // Fallback client-side Purchase — CAPI Kiwify é a fonte primária
+    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
+      ;(window as any).fbq('track', 'Purchase', {
+        value: 97.00,
+        currency: 'BRL',
+        content_name: 'FluxIA Skills Pack',
+        content_type: 'product',
+        num_items: 1,
+      })
+    }
+  }, [])
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] flex items-center justify-center px-4">

@@ -6,7 +6,7 @@ function trackCheckout() {
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
-      value: 47.00,
+      value: 97.00,
       currency: 'BRL',
       content_name: 'FluxIA Skills Pack',
       content_type: 'product',
@@ -64,7 +64,7 @@ export default function Hero() {
             target="_blank" rel="noopener noreferrer"
           >
             Quero minhas skills agora
-            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-3 py-1 rounded-lg">R$47</span>
+            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-3 py-1 rounded-lg">R$97</span>
           </a>
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-600">
             <span>🔒 Pagamento 100% seguro</span>
@@ -97,7 +97,7 @@ export default function Hero() {
             </div>
             <div className="bg-[#1a1a1a] rounded-xl px-4 py-4 text-sm text-gray-200 leading-relaxed">
               <span className="text-[#22c55e] font-semibold text-xs uppercase tracking-wider block mb-2">→ Output profissional</span>
-              "Você ainda usa o Claude com prompts soltos? É por isso que as respostas saem genéricas. Com o FluxIA, você instala um fluxo profissional e o Claude passa a entregar resultado de especialista — copy, estratégia, análise. Tudo em PT-BR. R$47 único. Comente FLUXO."
+              "Você ainda usa o Claude com prompts soltos? É por isso que as respostas saem genéricas. Com o FluxIA, você instala um fluxo profissional e o Claude passa a entregar resultado de especialista — copy, estratégia, análise. Tudo em PT-BR. R$97 único. Comente FLUXO."
             </div>
           </div>
         </div>

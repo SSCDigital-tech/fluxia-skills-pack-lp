@@ -24,7 +24,7 @@ export const trackPurchase = (value: number, currency = 'BRL') => {
 export const trackAddToCart = () => {
   trackEvent('AddToCart', {
     content_name: 'FluxIA Skills Pack',
-    value: 47,
+    value: 97,
     currency: 'BRL',
   })
 }
@@ -32,7 +32,7 @@ export const trackAddToCart = () => {
 export const trackInitiateCheckout = () => {
   trackEvent('InitiateCheckout', {
     content_name: 'FluxIA Skills Pack',
-    value: 47,
+    value: 97,
     currency: 'BRL',
   })
 }
