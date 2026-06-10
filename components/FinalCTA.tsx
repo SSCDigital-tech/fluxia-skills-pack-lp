@@ -39,14 +39,14 @@ export default function FinalCTA() {
             Quero minhas skills agora
             <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-4 py-1.5 rounded-lg">R$97</span>
           </a>
-          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-600">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-400">
             <span>🔒 Pagamento seguro</span>
             <span>⚡ Acesso imediato</span>
             <span>🛡️ Garantia 7 dias</span>
             <span>💳 Pagamento único</span>
           </div>
         </div>
-        <p className="mt-10 text-xs text-gray-700 max-w-lg mx-auto">
+        <p className="mt-10 text-xs text-gray-500 max-w-lg mx-auto">
           FluxIA Skills Pack é um produto independente e não possui afiliação oficial com a Anthropic ou Claude.
         </p>
       </div>

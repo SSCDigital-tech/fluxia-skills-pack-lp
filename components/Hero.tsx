@@ -64,11 +64,11 @@ export default function Hero() {
         {/* Social proof mini */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-10 text-sm text-gray-500">
           <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> 1.166 skills</span>
-          <span className="text-gray-700">·</span>
+          <span className="text-gray-500">·</span>
           <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> 14 categorias</span>
-          <span className="text-gray-700">·</span>
+          <span className="text-gray-500">·</span>
           <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> PT-BR nativo</span>
-          <span className="text-gray-700">·</span>
+          <span className="text-gray-500">·</span>
           <span className="flex items-center gap-1.5"><span className="text-[#22c55e]">✓</span> Funciona no plano gratuito</span>
         </div>
 
@@ -83,7 +83,7 @@ export default function Hero() {
             Quero minhas skills agora
             <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-3 py-1 rounded-lg">R$97</span>
           </a>
-          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-600">
+          <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-400">
             <span>🔒 Pagamento 100% seguro</span>
             <span>⚡ Acesso imediato</span>
             <span>🛡️ Garantia 7 dias</span>
@@ -94,7 +94,7 @@ export default function Hero() {
         {/* Scroll hint */}
         <div className="flex flex-col items-center mb-8 opacity-40">
           <span className="text-gray-500 text-xs mb-2 tracking-widest uppercase">veja mais</span>
-          <svg className="animate-bounce w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="animate-bounce w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
@@ -105,7 +105,7 @@ export default function Hero() {
             <div className="w-3 h-3 rounded-full bg-[#ef4444]" />
             <div className="w-3 h-3 rounded-full bg-[#facc15]" />
             <div className="w-3 h-3 rounded-full bg-[#22c55e]" />
-            <span className="ml-3 text-xs text-gray-600 font-mono">Claude · FluxIA › copy-anuncio-conversao</span>
+            <span className="ml-3 text-xs text-gray-500 font-mono">Claude · FluxIA › copy-anuncio-conversao</span>
           </div>
           <div className="space-y-3 text-left">
             <div className="bg-[#7c3aed]/12 border border-[#7c3aed]/20 rounded-xl px-4 py-3 text-sm text-gray-300">

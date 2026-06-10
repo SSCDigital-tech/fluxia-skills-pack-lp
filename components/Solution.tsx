@@ -41,7 +41,7 @@ export default function Solution() {
             <div className="bg-[#111111] rounded-xl p-4 mb-3 text-sm text-gray-400 italic">
               "Escreve um anúncio para minha loja de roupas"
             </div>
-            <div className="bg-[#0d0d0d] rounded-xl p-4 text-sm text-gray-600">
+            <div className="bg-[#0d0d0d] rounded-xl p-4 text-sm text-gray-400">
               "Venha conhecer nossa loja! Temos as melhores roupas com os melhores preços. Não perca!"
             </div>
             <p className="text-red-400 text-xs mt-3">⚠ Genérico. Não converte.</p>

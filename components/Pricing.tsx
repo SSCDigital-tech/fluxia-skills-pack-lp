@@ -61,7 +61,7 @@ export default function Pricing() {
             <span className="text-gray-500 line-through font-bold">R$3.480</span>
           </div>
         </div>
-        <p className="text-xs text-gray-700 mt-2 px-1">* Estimativa baseada no valor médio de consultoria especializada por área (R$120–600/h). Calculado item a item acima.</p>
+        <p className="text-xs text-gray-500 mt-2 px-1">* Estimativa baseada no valor médio de consultoria especializada por área (R$120–600/h). Calculado item a item acima.</p>
         </Reveal>
 
         {/* Offer card */}
@@ -87,7 +87,7 @@ export default function Pricing() {
           <div className="border-t border-[#2a2a2a] pt-6 mb-8">
             <div className="flex items-center justify-between mb-1">
               <span className="text-gray-500">Valor total</span>
-              <span className="text-gray-600 line-through">R$3.480</span>
+              <span className="text-gray-500 line-through">R$3.480</span>
             </div>
             <div className="flex items-end justify-between">
               <div>
@@ -99,7 +99,7 @@ export default function Pricing() {
                   <span className="text-2xl font-bold text-[#facc15]">R$</span>
                   <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}>97</span>
                 </div>
-                <p className="text-gray-600 text-xs">ou 12x R$8,97 no cartão**</p>
+                <p className="text-gray-400 text-xs">ou 12x R$8,97 no cartão**</p>
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function Pricing() {
           >
             🚀 Quero minhas skills agora — R$97
           </a>
-          <p className="text-center text-gray-600 text-sm mt-4">
+          <p className="text-center text-gray-400 text-sm mt-4">
             Acesso imediato · Garantia de 7 dias · Pagamento 100% seguro via Kiwify
           </p>
 
@@ -124,17 +124,17 @@ export default function Pricing() {
                 <span className="w-5 h-5 rounded-full bg-[#7c3aed]/20 text-[#a78bfa] flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
                 Pagamento confirmado
               </span>
-              <span className="text-gray-700">→</span>
+              <span className="text-gray-500">→</span>
               <span className="flex items-center gap-1.5 text-gray-400">
                 <span className="w-5 h-5 rounded-full bg-[#7c3aed]/20 text-[#a78bfa] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
                 E-mail com acesso imediato
               </span>
-              <span className="text-gray-700">→</span>
+              <span className="text-gray-500">→</span>
               <span className="flex items-center gap-1.5 text-gray-400">
                 <span className="w-5 h-5 rounded-full bg-[#7c3aed]/20 text-[#a78bfa] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
                 Baixa as 1.166 skills
               </span>
-              <span className="text-gray-700">→</span>
+              <span className="text-gray-500">→</span>
               <span className="flex items-center gap-1.5 text-[#22c55e] font-medium">
                 <span className="w-5 h-5 rounded-full bg-[#22c55e]/15 flex items-center justify-center text-xs flex-shrink-0">⚡</span>
                 Usa em minutos
@@ -153,7 +153,7 @@ export default function Pricing() {
             </div>
           </div>
 
-          <p className="text-center text-gray-700 text-xs mt-4">
+          <p className="text-center text-gray-500 text-xs mt-4">
             **Parcelamento disponível no cartão de crédito. Sujeito à análise da operadora.
           </p>
         </div>

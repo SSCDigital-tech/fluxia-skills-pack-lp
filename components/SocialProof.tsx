@@ -69,17 +69,17 @@ export default function SocialProof() {
               <span className="text-[#22c55e] text-base">✅</span>
               <span>Vendas rastreadas via Kiwify</span>
             </div>
-            <span className="text-gray-700 hidden sm:inline">·</span>
+            <span className="text-gray-500 hidden sm:inline">·</span>
             <div className="flex items-center gap-2 text-gray-400">
               <span className="text-[#22c55e] text-base">🛡️</span>
               <span>Garantia de 7 dias ativa</span>
             </div>
-            <span className="text-gray-700 hidden sm:inline">·</span>
+            <span className="text-gray-500 hidden sm:inline">·</span>
             <div className="flex items-center gap-2 text-gray-400">
               <span className="text-[#22c55e] text-base">⚡</span>
               <span>Entrega automática e imediata</span>
             </div>
-            <span className="text-gray-700 hidden sm:inline">·</span>
+            <span className="text-gray-500 hidden sm:inline">·</span>
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-[#22c55e] rounded-full animate-pulse flex-shrink-0" />
               <span className="text-[#22c55e] font-medium">Pixel EMQ 9,3/10</span>

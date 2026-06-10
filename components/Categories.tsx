@@ -44,9 +44,9 @@ export default function Categories() {
         <div className="mt-10 text-center">
           <div className="inline-flex items-center gap-6 bg-[#111111] border border-[#7c3aed]/20 rounded-2xl px-8 py-4 text-sm text-gray-400">
             <span><span className="text-white font-bold text-lg">1.166</span> skills profissionais</span>
-            <span className="text-gray-700">·</span>
+            <span className="text-gray-500">·</span>
             <span><span className="text-white font-bold text-lg">14</span> categorias</span>
-            <span className="text-gray-700">·</span>
+            <span className="text-gray-500">·</span>
             <span>Acesso imediato após a compra</span>
           </div>
         </div>

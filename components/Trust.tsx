@@ -26,7 +26,7 @@ export default function Trust() {
               <span className="text-gray-600 text-xs font-medium">Skills Pack</span>
             </div>
           </div>
-          <p className="text-gray-600 text-sm mb-6">Compra 100% segura · Produto digital entregue via Kiwify</p>
+          <p className="text-gray-400 text-sm mb-6">Compra 100% segura · Produto digital entregue via Kiwify</p>
           <div className="flex flex-wrap items-center justify-center gap-6 mb-6 text-sm text-gray-500">
             <span className="flex items-center gap-2">🔒 SSL · Pagamento criptografado</span>
             <span className="flex items-center gap-2">💳 Kiwify · Plataforma certificada</span>
@@ -44,22 +44,22 @@ export default function Trust() {
             <Link href="/termos" className="text-gray-500 hover:text-gray-300 transition-colors">
               Termos de Uso
             </Link>
-            <span className="text-gray-800">·</span>
+            <span className="text-gray-600">·</span>
             <Link href="/privacidade" className="text-gray-500 hover:text-gray-300 transition-colors">
               Política de Privacidade
             </Link>
-            <span className="text-gray-800">·</span>
+            <span className="text-gray-600">·</span>
             <a href="mailto:sscdigitalcontato@gmail.com" className="text-gray-500 hover:text-gray-300 transition-colors flex items-center gap-1.5">
               ✉️ sscdigitalcontato@gmail.com
             </a>
           </div>
 
           {/* Disclaimer legal */}
-          <p className="text-xs text-gray-700 max-w-2xl mx-auto leading-relaxed text-center mb-4">
+          <p className="text-xs text-gray-500 max-w-2xl mx-auto leading-relaxed text-center mb-4">
             FluxIA Skills Pack é um produto digital independente e não possui afiliação oficial com a Anthropic Inc. ou com o produto Claude.
             Os resultados apresentados dependem do esforço e aplicação individual de cada usuário. Este produto não garante resultados financeiros.
           </p>
-          <p className="text-xs text-gray-800 text-center">
+          <p className="text-xs text-gray-600 text-center">
             © {new Date().getFullYear()} SSCDigital. Todos os direitos reservados. CNPJ em processo de abertura.
           </p>
         </div>

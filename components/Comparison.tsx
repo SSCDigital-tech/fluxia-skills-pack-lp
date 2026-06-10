@@ -33,7 +33,7 @@ export default function Comparison() {
             </div>
           ))}
         </div>
-        <p className="text-center text-sm text-gray-600 mt-6">
+        <p className="text-center text-sm text-gray-400 mt-6">
           Diferente de outros packs, FluxIA não são prompts soltos — são skills com contexto, estrutura e instruções completas para cada área.
         </p>
       </div>
