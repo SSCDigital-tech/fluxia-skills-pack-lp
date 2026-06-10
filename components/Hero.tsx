@@ -1,8 +1,11 @@
 'use client'
+import { useEffect } from 'react'
+
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
+type FbqWindow = Window & { fbq?: (...args: unknown[]) => void }
+
 function trackCheckout() {
-  type FbqWindow = Window & { fbq?: (...args: unknown[]) => void }
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
@@ -16,6 +19,20 @@ function trackCheckout() {
 }
 
 export default function Hero() {
+  useEffect(() => {
+    // ViewContent — sinaliza ao pixel que o visitante visualizou o produto
+    // Alimenta o TOF (LANDING_PAGE_VIEWS) e cria audiência de interesse
+    const fbq = (window as FbqWindow).fbq
+    if (typeof fbq === 'function') {
+      fbq('track', 'ViewContent', {
+        content_name: 'FluxIA Skills Pack',
+        content_ids: ['fluxia-skills-pack'],
+        content_type: 'product',
+        value: 97.00,
+        currency: 'BRL',
+      })
+    }
+  }, [])
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-24 pt-32">
       {/* BG effects */}
