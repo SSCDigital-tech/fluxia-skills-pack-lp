@@ -5,12 +5,26 @@ export default function Trust() {
       {/* Trust bar */}
       <div className="py-12 px-4 border-b border-[#1a1a1a]">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center items-center gap-2.5 mb-5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#a855f7] flex items-center justify-center">
-              <span className="text-white font-extrabold text-sm leading-none">F</span>
+          <div className="flex justify-center items-center gap-3 mb-5">
+            {/* FluxIA — Flux Wave mark */}
+            <svg width="46" height="30" viewBox="4 10 56 42" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+              <defs>
+                <linearGradient id="ftr-wave" x1="8" y1="0" x2="54" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#a78bfa"/>
+                  <stop offset="100%" stopColor="#3b82f6"/>
+                </linearGradient>
+              </defs>
+              <path d="M 8 42 Q 18 36 30 42 Q 42 48 54 42" stroke="#a78bfa" strokeWidth="3.5" fill="none" strokeLinecap="round" opacity="0.3"/>
+              <path d="M 8 30 Q 18 24 30 30 Q 42 36 54 30" stroke="url(#ftr-wave)" strokeWidth="4.5" fill="none" strokeLinecap="round" opacity="0.7"/>
+              <path d="M 8 18 Q 20 12 32 18 Q 44 24 54 18" stroke="url(#ftr-wave)" strokeWidth="6" fill="none" strokeLinecap="round"/>
+              <circle cx="8" cy="18" r="4" fill="#facc15"/>
+            </svg>
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-white font-extrabold text-lg tracking-tight">
+                Flux<span className="bg-gradient-to-r from-[#a78bfa] to-[#7c3aed] bg-clip-text text-transparent">IA</span>
+              </span>
+              <span className="text-gray-600 text-xs font-medium">Skills Pack</span>
             </div>
-            <span className="text-white font-extrabold text-lg tracking-tight">FluxIA</span>
-            <span className="text-gray-600 text-xs font-medium">Skills Pack</span>
           </div>
           <p className="text-gray-600 text-sm mb-6">Compra 100% segura · Produto digital entregue via Kiwify</p>
           <div className="flex flex-wrap items-center justify-center gap-6 mb-6 text-sm text-gray-500">
