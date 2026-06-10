@@ -6,7 +6,7 @@ function trackCheckout() {
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
-      value: 47.00,
+      value: 97.00,
       currency: 'BRL',
       content_name: 'FluxIA Skills Pack',
       content_type: 'product',

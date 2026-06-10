@@ -1,6 +1,5 @@
 'use client'
 import Reveal from './Reveal'
-import Counter from './Counter'
 
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
@@ -41,7 +40,7 @@ export default function Pricing() {
           <p className="text-gray-400">Pagamento único. Sem mensalidade. Acesso vitalício.</p>
           <div className="inline-flex items-center gap-2 mt-4 bg-[#facc15]/8 border border-[#facc15]/20 rounded-full px-4 py-2 text-sm text-[#facc15] font-medium">
             <span className="w-1.5 h-1.5 bg-[#facc15] rounded-full animate-pulse" />
-            Acesso completo por R$97 — pagamento único, sem mensalidade
+            🔥 Lançamento — preço sobe com as próximas vendas
           </div>
         </div>
 
@@ -62,6 +61,7 @@ export default function Pricing() {
             <span className="text-gray-500 line-through font-bold">R$3.480</span>
           </div>
         </div>
+        <p className="text-xs text-gray-700 mt-2 px-1">* Estimativa baseada no valor médio de consultoria especializada por área (R$120–600/h). Calculado item a item acima.</p>
         </Reveal>
 
         {/* Offer card */}
@@ -90,13 +90,16 @@ export default function Pricing() {
               <span className="text-gray-600 line-through">R$3.480</span>
             </div>
             <div className="flex items-end justify-between">
-              <span className="text-white font-bold text-lg">Preço de lançamento</span>
+              <div>
+                <span className="text-white font-bold text-lg block">Preço de lançamento</span>
+                <span className="text-[#22c55e] text-xs font-semibold">Uma vez. Acesso para sempre.</span>
+              </div>
               <div className="text-right">
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-[#facc15]">R$</span>
-                  <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}><Counter to={97} /></span>
+                  <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}>97</span>
                 </div>
-                <p className="text-gray-600 text-xs">ou 12x R$8,97*</p>
+                <p className="text-gray-600 text-xs">ou 12x R$8,97 no cartão**</p>
               </div>
             </div>
           </div>
@@ -113,16 +116,46 @@ export default function Pricing() {
             Acesso imediato · Garantia de 7 dias · Pagamento 100% seguro via Kiwify
           </p>
 
-          <div className="mt-8 bg-[#1a1a1a] rounded-xl p-5 flex items-start gap-4">
+          {/* Delivery flow */}
+          <div className="mt-6 bg-[#0d0d0d] border border-[#1a1a1a] rounded-xl p-5">
+            <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-3">Como funciona após a compra</p>
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <span className="flex items-center gap-1.5 text-gray-400">
+                <span className="w-5 h-5 rounded-full bg-[#7c3aed]/20 text-[#a78bfa] flex items-center justify-center text-xs font-bold flex-shrink-0">1</span>
+                Pagamento confirmado
+              </span>
+              <span className="text-gray-700">→</span>
+              <span className="flex items-center gap-1.5 text-gray-400">
+                <span className="w-5 h-5 rounded-full bg-[#7c3aed]/20 text-[#a78bfa] flex items-center justify-center text-xs font-bold flex-shrink-0">2</span>
+                E-mail com acesso imediato
+              </span>
+              <span className="text-gray-700">→</span>
+              <span className="flex items-center gap-1.5 text-gray-400">
+                <span className="w-5 h-5 rounded-full bg-[#7c3aed]/20 text-[#a78bfa] flex items-center justify-center text-xs font-bold flex-shrink-0">3</span>
+                Baixa as 1.166 skills
+              </span>
+              <span className="text-gray-700">→</span>
+              <span className="flex items-center gap-1.5 text-[#22c55e] font-medium">
+                <span className="w-5 h-5 rounded-full bg-[#22c55e]/15 flex items-center justify-center text-xs flex-shrink-0">⚡</span>
+                Usa em minutos
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6 bg-[#1a1a1a] rounded-xl p-5 flex items-start gap-4">
             <span className="text-4xl">🛡️</span>
             <div>
-              <p className="font-bold text-white">Garantia de 7 Dias</p>
+              <p className="font-bold text-white">Garantia de 7 Dias — Risco Zero</p>
               <p className="text-gray-500 text-sm mt-1">
                 Se você acessar o produto e não ver valor, solicite o reembolso em até 7 dias.
-                Devolvemos 100% sem perguntas.
+                Devolvemos 100% sem perguntas, sem burocracia.
               </p>
             </div>
           </div>
+
+          <p className="text-center text-gray-700 text-xs mt-4">
+            **Parcelamento disponível no cartão de crédito. Sujeito à análise da operadora.
+          </p>
         </div>
         </Reveal>
       </div>

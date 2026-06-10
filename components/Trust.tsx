@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 export default function Trust() {
   return (
@@ -6,8 +5,12 @@ export default function Trust() {
       {/* Trust bar */}
       <div className="py-12 px-4 border-b border-[#1a1a1a]">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="flex justify-center mb-5">
-            <Image src="/logo-sscdigital.svg" alt="SSCDigital" width={180} height={42} />
+          <div className="flex justify-center items-center gap-2.5 mb-5">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7c3aed] to-[#a855f7] flex items-center justify-center">
+              <span className="text-white font-extrabold text-sm leading-none">F</span>
+            </div>
+            <span className="text-white font-extrabold text-lg tracking-tight">FluxIA</span>
+            <span className="text-gray-600 text-xs font-medium">Skills Pack</span>
           </div>
           <p className="text-gray-600 text-sm mb-6">Compra 100% segura · Produto digital entregue via Kiwify</p>
           <div className="flex flex-wrap items-center justify-center gap-6 mb-6 text-sm text-gray-500">

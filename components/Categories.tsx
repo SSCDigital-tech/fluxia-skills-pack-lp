@@ -1,4 +1,5 @@
-const cats = [
+type Cat = { icon: string; name: string; n: number; badge?: string }
+const cats: Cat[] = [
   { icon: '📣', name: 'Marketing e Publicidade', n: 222 },
   { icon: '⚙️', name: 'Operações e Gestão', n: 245 },
   { icon: '✍️', name: 'Conteúdo e Copy', n: 210 },
@@ -12,7 +13,7 @@ const cats = [
   { icon: '🎨', name: 'Design e Branding', n: 24 },
   { icon: '💻', name: 'Código e Automação', n: 22 },
   { icon: '🎬', name: 'Direção Criativa', n: 20 },
-  { icon: '🛍️', name: 'TikTok Shop e Criadores', n: 5 },
+  { icon: '🛍️', name: 'TikTok Shop e Criadores', n: 5, badge: 'novo' },
 ]
 export default function Categories() {
   return (
@@ -28,7 +29,12 @@ export default function Categories() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {cats.map((c) => (
-            <div key={c.name} className="card-border p-5 hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/5 transition-all duration-200 cursor-default">
+            <div key={c.name} className="card-border p-5 hover:border-[#7c3aed]/40 hover:bg-[#7c3aed]/5 transition-all duration-200 cursor-default relative">
+              {c.badge && (
+                <span className="absolute top-3 right-3 bg-[#7c3aed]/20 text-[#a78bfa] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border border-[#7c3aed]/30">
+                  {c.badge}
+                </span>
+              )}
               <div className="text-3xl mb-3">{c.icon}</div>
               <div className="text-sm font-semibold text-white leading-tight mb-2">{c.name}</div>
               <div className="text-xs text-gray-500">{c.n} skills</div>
