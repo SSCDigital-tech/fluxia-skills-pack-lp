@@ -21,10 +21,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Strip BOM (U+FEFF) and whitespace — env file may have been saved with UTF-8 BOM encoding
+  // eslint-disable-next-line no-control-regex
+  const pixelId = (process.env.NEXT_PUBLIC_META_PIXEL_ID || '').replace(/^﻿/, '').trim()
+
   return (
     <html lang="pt-BR">
       <head>
-        {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
+        {pixelId && (
           <script
             dangerouslySetInnerHTML={{
               __html: `
@@ -36,7 +40,7 @@ export default function RootLayout({
                 t.src=v;s=b.getElementsByTagName(e)[0];
                 s.parentNode.insertBefore(t,s)}(window, document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
+                fbq('init', '${pixelId}');
                 fbq('track', 'PageView');
               `,
             }}
