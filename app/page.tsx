@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Problem from '@/components/Problem'
 import Solution from '@/components/Solution'
+import InsideProduct from '@/components/InsideProduct'
 import Categories from '@/components/Categories'
 import Comparison from '@/components/Comparison'
 import SocialProof from '@/components/SocialProof'
@@ -19,6 +20,7 @@ export default function Home() {
       <Hero />
       <Problem />
       <Solution />
+      <InsideProduct />
       <Categories />
       <Comparison />
       <SocialProof />
