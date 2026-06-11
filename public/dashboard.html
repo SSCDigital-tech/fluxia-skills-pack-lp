@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FluxIA — Mission Control Meta Ads</title>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg2: #111111;
+    --bg3: #161616;
+    --border: #1e1e1e;
+    --border2: #2a2a2a;
+    --white: #ffffff;
+    --gray-100: #f3f4f6;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --purple-mid: #a855f7;
+    --blue: #3b82f6;
+    --gold: #facc15;
+    --green: #22c55e;
+    --red: #ef4444;
+    --orange: #f97316;
+    --yellow: #eab308;
+    --teal: #14b8a6;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 14px; }
+  body {
+    background: var(--bg);
+    color: var(--gray-300);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+  a { color: var(--purple-light); text-decoration: none; }
+  a:hover { color: var(--white); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  .topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-text {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  .logo-text span {
+    background: linear-gradient(90deg, var(--purple-light), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .badge-mission {
+    background: linear-gradient(135deg, var(--purple)/20, var(--blue)/20);
+    border: 1px solid var(--purple)/30;
+    color: var(--purple-light);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .update-time {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+  }
+  .update-time strong { color: var(--gray-400); }
+  .alert-badge {
+    background: rgba(239,68,68,0.15);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #fca5a5;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .alert-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    animation: pulse-red 1.5s infinite;
+  }
+  @keyframes pulse-red {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── SECTION HEADER ── */
+  .section { margin-top: 28px; }
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── CARD BASE ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .card-sm { padding: 16px; }
+  .card-hover:hover { border-color: var(--border2); }
+
+  /* ── KPI GRID ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+  .kpi-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--card-accent, transparent);
+    opacity: 0.04;
+    pointer-events: none;
+  }
+  .kpi-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .kpi-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .kpi-sub {
+    font-size: 0.7rem;
+    color: var(--gray-500);
+  }
+  .kpi-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 1.2rem;
+    opacity: 0.4;
+  }
+  .kpi-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    margin-top: 6px;
+    padding: 2px 7px;
+    border-radius: 100px;
+  }
+  .kpi-trend.bad { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .kpi-trend.warn { background: rgba(234,179,8,0.15); color: #fde047; }
+  .kpi-trend.good { background: rgba(34,197,94,0.15); color: #86efac; }
+
+  /* ── FUNNEL BAR ── */
+  .funnel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+  .funnel-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 18px;
+    position: relative;
+  }
+  .funnel-step {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .funnel-num {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .funnel-sub {
+    font-size: 0.68rem;
+    color: var(--gray-500);
+    margin-top: 4px;
+  }
+  .funnel-bar-track {
+    height: 3px;
+    background: var(--border2);
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .funnel-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  /* ── CAMPAIGN CARDS ── */
+  .campaigns-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .camp-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .camp-card.active-glow { border-color: rgba(34,197,94,0.25); }
+  .camp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .camp-name { font-size: 0.85rem; font-weight: 700; color: var(--white); line-height: 1.3; }
+  .camp-id { font-size: 0.62rem; color: var(--gray-600); font-family: monospace; margin-top: 2px; }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status-active { background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.25); }
+  .status-paused { background: rgba(249,115,22,0.12); color: #fdba74; border: 1px solid rgba(249,115,22,0.25); }
+  .status-unknown { background: rgba(107,114,128,0.12); color: #9ca3af; border: 1px solid rgba(107,114,128,0.25); }
+  .status-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .status-active .status-dot { background: var(--green); }
+  .status-paused .status-dot { background: var(--orange); }
+  .status-unknown .status-dot { background: var(--gray-500); }
+  .camp-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .camp-metric { }
+  .camp-metric-label { font-size: 0.6rem; color: var(--gray-600); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .camp-metric-val { font-size: 1rem; font-weight: 700; color: var(--white); }
+  .camp-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    font-size: 0.72rem;
+    color: var(--gray-500);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .camp-objective {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.2);
+    color: var(--purple-light);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+  .camp-budget-pill {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--gray-400);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  /* ── ADS TABLE ── */
+  .ads-table-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    background: var(--bg3);
+    padding: 10px 14px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    text-align: left;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--border);
+  }
+  thead th:first-child { border-radius: 13px 0 0 0; }
+  thead th:last-child { border-radius: 0 13px 0 0; text-align: right; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  tbody td {
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    color: var(--gray-300);
+    vertical-align: middle;
+  }
+  tbody td:last-child { text-align: right; }
+  .ad-name { font-weight: 600; color: var(--white); font-size: 0.78rem; line-height: 1.3; }
+  .ad-name-sub { font-size: 0.65rem; color: var(--gray-600); font-family: monospace; margin-top: 1px; }
+  .tag-winner {
+    display: inline-block;
+    background: rgba(250,204,21,0.12);
+    border: 1px solid rgba(250,204,21,0.3);
+    color: var(--gold);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .tag-ctr {
+    display: inline-block;
+    background: rgba(20,184,166,0.12);
+    border: 1px solid rgba(20,184,166,0.3);
+    color: #5eead4;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+  .tag-new {
+    display: inline-block;
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.3);
+    color: #93c5fd;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
+  .roas-good { color: var(--green); font-weight: 700; }
+  .roas-bad { color: var(--red); font-weight: 700; }
+  .roas-na { color: var(--gray-600); }
+  .num { font-variant-numeric: tabular-nums; }
+  .tof-group-row td {
+    background: rgba(59,130,246,0.04);
+    color: var(--gray-500);
+    font-size: 0.75rem;
+    padding: 10px 14px;
+  }
+  .tof-group-row td:first-child { font-weight: 700; color: #93c5fd; }
+
+  /* ── PIXEL HEALTH ── */
+  .pixel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .pixel-stat {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pixel-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .pixel-stat-label { font-size: 0.68rem; color: var(--gray-500); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .pixel-stat-val { font-size: 1.1rem; font-weight: 800; color: var(--white); }
+  .pixel-stat-sub { font-size: 0.62rem; color: var(--gray-600); margin-top: 1px; }
+  .emq-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--border2);
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .emq-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--green), #16a34a);
+  }
+  .pixel-health-card {
+    background: var(--bg2);
+    border: 1px solid rgba(34,197,94,0.2);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .pixel-id-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .pixel-id-tag {
+    font-family: monospace;
+    font-size: 0.72rem;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--gray-400);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .health-check {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+  }
+  .health-check:last-child { margin-bottom: 0; }
+  .check-icon { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; flex-shrink: 0; }
+  .check-ok { background: rgba(34,197,94,0.15); color: var(--green); }
+  .check-warn { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .check-bad { background: rgba(239,68,68,0.15); color: var(--red); }
+
+  /* ── ALERTS ── */
+  .alert {
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .alert:last-child { margin-bottom: 0; }
+  .alert-critical { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); }
+  .alert-warning { background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.2); }
+  .alert-info { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); }
+  .alert-success { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); }
+  .alert-emoji { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .alert-body { }
+  .alert-title { font-weight: 700; font-size: 0.8rem; color: var(--white); margin-bottom: 3px; }
+  .alert-desc { font-size: 0.73rem; color: var(--gray-400); line-height: 1.5; }
+  .alert-action {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 6px;
+    cursor: default;
+  }
+  .action-red { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .action-yellow { background: rgba(234,179,8,0.15); color: #fde047; }
+  .action-blue { background: rgba(59,130,246,0.15); color: #93c5fd; }
+  .action-green { background: rgba(34,197,94,0.15); color: #86efac; }
+
+  /* ── MILESTONES ── */
+  .milestone { margin-bottom: 16px; }
+  .milestone:last-child { margin-bottom: 0; }
+  .milestone-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .milestone-title { font-size: 0.8rem; font-weight: 600; color: var(--gray-300); display: flex; align-items: center; gap: 8px; }
+  .milestone-pct { font-size: 0.75rem; font-weight: 700; color: var(--white); }
+  .milestone-track {
+    height: 8px;
+    background: var(--border2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .milestone-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fill-green { background: linear-gradient(90deg, var(--green), #16a34a); }
+  .fill-purple { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
+  .fill-blue { background: linear-gradient(90deg, var(--blue), var(--teal)); }
+  .fill-gold { background: linear-gradient(90deg, #d97706, var(--gold)); }
+  .milestone-sub { font-size: 0.65rem; color: var(--gray-600); }
+  .ms-done { opacity: 0.7; }
+  .ms-done .milestone-fill { background: linear-gradient(90deg, var(--green), #16a34a) !important; }
+
+  /* ── NEXT STEPS ── */
+  .steps-list { display: grid; gap: 10px; }
+  .step-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    flex-shrink: 0;
+    border: 2px solid;
+  }
+  .step-num-1 { border-color: rgba(239,68,68,0.5); color: #fca5a5; background: rgba(239,68,68,0.08); }
+  .step-num-2 { border-color: rgba(234,179,8,0.5); color: #fde047; background: rgba(234,179,8,0.08); }
+  .step-num-3 { border-color: rgba(59,130,246,0.5); color: #93c5fd; background: rgba(59,130,246,0.08); }
+  .step-num-4 { border-color: rgba(167,139,250,0.5); color: var(--purple-light); background: rgba(124,58,237,0.08); }
+  .step-num-5 { border-color: rgba(34,197,94,0.5); color: #86efac; background: rgba(34,197,94,0.08); }
+  .step-body { }
+  .step-horizon {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 3px;
+  }
+  .h-urgente { color: #fca5a5; }
+  .h-hoje { color: #fde047; }
+  .h-semana { color: #93c5fd; }
+  .h-proximo { color: #86efac; }
+  .step-title { font-size: 0.82rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .step-desc { font-size: 0.73rem; color: var(--gray-400); line-height: 1.5; }
+
+  /* ── FINANCIAL ── */
+  .financial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+  .fin-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .fin-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-600); margin-bottom: 6px; font-weight: 600; }
+  .fin-val { font-size: 1.3rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 4px; }
+  .fin-sub { font-size: 0.68rem; color: var(--gray-500); }
+  .fin-note { font-size: 0.65rem; color: var(--gray-600); margin-top: 4px; font-style: italic; }
+
+  /* ── GRADIENT TEXT ── */
+  .gradient-text {
+    background: linear-gradient(90deg, var(--purple-light), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 48px;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--gray-600);
+  }
+  .footer strong { color: var(--gray-500); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .funnel-grid { grid-template-columns: repeat(2, 1fr); }
+    .camps-grid { grid-template-columns: 1fr; }
+    .kpi-value { font-size: 1.4rem; }
+    .topbar-inner { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ TOPBAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="logo-row">
+      <!-- Flux Wave Mark -->
+      <svg width="36" height="24" viewBox="4 10 56 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+        <defs>
+          <linearGradient id="db-wave" x1="8" y1="0" x2="54" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#3b82f6"/>
+          </linearGradient>
+        </defs>
+        <path d="M 8 42 Q 18 36 30 42 Q 42 48 54 42" stroke="#a78bfa" stroke-width="3.5" fill="none" stroke-linecap="round" opacity="0.25"/>
+        <path d="M 8 30 Q 18 24 30 30 Q 42 36 54 30" stroke="url(#db-wave)" stroke-width="4.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+        <path d="M 8 18 Q 20 12 32 18 Q 44 24 54 18" stroke="url(#db-wave)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <circle cx="8" cy="18" r="4" fill="#facc15"/>
+      </svg>
+      <div>
+        <div class="logo-text">Flux<span>IA</span> <span style="font-weight:400;font-size:0.9rem;opacity:0.6;">·</span> <span style="font-size:0.9rem;font-weight:700;color:#9ca3af;">Mission Control</span></div>
+      </div>
+      <span class="badge-mission">Meta Ads</span>
+    </div>
+    <div class="topbar-right">
+      <span class="update-time">Atualizado: <strong>10 Jun 2026</strong> · <span id="current-time">--:--</span> BRT</span>
+      <span class="alert-badge"><span class="alert-dot"></span>1 alerta crítico</span>
+      <a href="https://fluxia-skills-pack-lp.vercel.app" target="_blank" style="font-size:0.7rem;color:var(--gray-500);">↗ Ver LP</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════ MAIN -->
+<div class="container">
+
+  <!-- ── KPIs PRINCIPAIS ────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">📊 Visão Geral · Últimos 30 dias (11 Mai — 09 Jun 2026)</div>
+    <div class="kpi-grid">
+
+      <div class="kpi-card" style="--card-accent:var(--purple);">
+        <div class="kpi-icon">💸</div>
+        <div class="kpi-label">Total Investido</div>
+        <div class="kpi-value">R$284</div>
+        <div class="kpi-sub">R$284,12 · conta SSCDigital</div>
+        <div class="kpi-trend warn">▶ R$50/dia ativo</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--blue);">
+        <div class="kpi-icon">👁️</div>
+        <div class="kpi-label">Impressões</div>
+        <div class="kpi-value">3.787</div>
+        <div class="kpi-sub">Alcance: 2.854 pessoas</div>
+        <div class="kpi-trend warn">Freq. 1,33x</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--teal);">
+        <div class="kpi-icon">🖱️</div>
+        <div class="kpi-label">Cliques na LP</div>
+        <div class="kpi-value">111</div>
+        <div class="kpi-sub">CTR médio 2,93%</div>
+        <div class="kpi-trend warn">CPC R$2,56</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--green);">
+        <div class="kpi-icon">🛒</div>
+        <div class="kpi-label">Compras (Pixel)</div>
+        <div class="kpi-value">5</div>
+        <div class="kpi-sub">2 atribuídas aos ads</div>
+        <div class="kpi-trend good">+3 orgânicas/diretas</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--red);">
+        <div class="kpi-icon">📈</div>
+        <div class="kpi-label">ROAS (Meta Attr.)</div>
+        <div class="kpi-value" style="color:var(--orange);">0,28x</div>
+        <div class="kpi-sub">Meta atribuição padrão</div>
+        <div class="kpi-trend bad">Meta < break-even</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--gold);">
+        <div class="kpi-icon">🏆</div>
+        <div class="kpi-label">ROAS Real Estimado</div>
+        <div class="kpi-value" style="color:var(--gold);">1,71x</div>
+        <div class="kpi-sub">5 compras × R$97 / R$284</div>
+        <div class="kpi-trend good">Acima break-even</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--purple);">
+        <div class="kpi-icon">🎯</div>
+        <div class="kpi-label">CAC Melhor Ad</div>
+        <div class="kpi-value">R$51</div>
+        <div class="kpi-sub">Ad "1166 Quantidade v3"</div>
+        <div class="kpi-trend warn">CAC médio R$142</div>
+      </div>
+
+      <div class="kpi-card" style="--card-accent:var(--blue);">
+        <div class="kpi-icon">⚡</div>
+        <div class="kpi-label">Budget Ativo</div>
+        <div class="kpi-value">R$50</div>
+        <div class="kpi-sub">por dia · 2 campanhas</div>
+        <div class="kpi-trend good">BOF R$20 + TOF R$30</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FUNIL DE HOJE ───────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">⚡ Funil Hoje · 10 Jun 2026 (até ~19h BRT)</div>
+    <div class="funnel-grid">
+
+      <div class="funnel-card">
+        <div class="funnel-step" style="color:var(--gray-500);">PageView</div>
+        <div class="funnel-num">295</div>
+        <div class="funnel-sub">visitantes na LP hoje</div>
+        <div class="funnel-bar-track">
+          <div class="funnel-bar-fill" style="width:100%;background:var(--gray-600);"></div>
+        </div>
+      </div>
+
+      <div class="funnel-card">
+        <div class="funnel-step" style="color:var(--blue);">ViewContent</div>
+        <div class="funnel-num" style="color:var(--white);">249</div>
+        <div class="funnel-sub">viram o produto (84%)</div>
+        <div class="funnel-bar-track">
+          <div class="funnel-bar-fill" style="width:84%;background:linear-gradient(90deg,var(--blue),var(--teal));"></div>
+        </div>
+      </div>
+
+      <div class="funnel-card">
+        <div class="funnel-step" style="color:var(--yellow);">Init. Checkout</div>
+        <div class="funnel-num" style="color:var(--white);">4</div>
+        <div class="funnel-sub">iniciaram pagamento (1,6%)</div>
+        <div class="funnel-bar-track">
+          <div class="funnel-bar-fill" style="width:1.6%;background:linear-gradient(90deg,var(--yellow),var(--gold));"></div>
+        </div>
+      </div>
+
+      <div class="funnel-card">
+        <div class="funnel-step" style="color:var(--green);">Purchase</div>
+        <div class="funnel-num" style="color:var(--gray-500);">0</div>
+        <div class="funnel-sub">compras hoje (até agora)</div>
+        <div class="funnel-bar-track">
+          <div class="funnel-bar-fill" style="width:0%;background:var(--green);"></div>
+        </div>
+      </div>
+
+    </div>
+    <div style="margin-top:10px;padding:10px 14px;background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.15);border-radius:10px;font-size:0.72rem;color:var(--gray-400);">
+      💡 <strong style="color:#93c5fd;">ViewContent ativado em 09 Jun 2026</strong> — funil agora rastreia visitantes qualificados para otimização do TOF. Total acumulado: <strong style="color:var(--white);">263 VC</strong> em 2 dias.
+    </div>
+  </div>
+
+  <!-- ── CAMPANHAS ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">📣 Campanhas Ativas</div>
+    <div class="campaigns-grid">
+
+      <!-- BOF -->
+      <div class="camp-card active-glow">
+        <div class="camp-header">
+          <div>
+            <div class="camp-name">FluxIA Skills Pack — Conversões</div>
+            <div class="camp-id">ID: 52546794894011</div>
+          </div>
+          <span class="status-pill status-active"><span class="status-dot"></span>Ativo</span>
+        </div>
+        <div class="camp-metrics">
+          <div class="camp-metric">
+            <div class="camp-metric-label">Gasto 30d</div>
+            <div class="camp-metric-val">R$284,12</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">CTR</div>
+            <div class="camp-metric-val" style="color:var(--orange);">2,93%</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">ROAS</div>
+            <div class="camp-metric-val" style="color:var(--red);">0,28x</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Impressões</div>
+            <div class="camp-metric-val">3.787</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Alcance</div>
+            <div class="camp-metric-val">2.854</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Compras</div>
+            <div class="camp-metric-val">2</div>
+          </div>
+        </div>
+        <div class="camp-footer">
+          <span class="camp-objective">🎯 OUTCOME_SALES</span>
+          <span class="camp-budget-pill">💰 R$20/dia (adset)</span>
+          <span style="color:var(--red);font-size:0.68rem;font-weight:600;">⚠ CTR ↘ -21,83%</span>
+        </div>
+      </div>
+
+      <!-- TOF -->
+      <div class="camp-card active-glow" style="border-color:rgba(59,130,246,0.25);">
+        <div class="camp-header">
+          <div>
+            <div class="camp-name">FluxIA — TOF Tráfego LP Views [06/2026]</div>
+            <div class="camp-id">ID: 52552755338811</div>
+          </div>
+          <span class="status-pill status-active"><span class="status-dot"></span>Ativo</span>
+        </div>
+        <div class="camp-metrics">
+          <div class="camp-metric">
+            <div class="camp-metric-label">Gasto 30d</div>
+            <div class="camp-metric-val" style="color:var(--gray-500);">R$0,00</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Ads Ativos</div>
+            <div class="camp-metric-val" style="color:#93c5fd;">4 novos</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Objetivo</div>
+            <div class="camp-metric-val" style="font-size:0.7rem;color:var(--gray-400);">LPV</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Impressões</div>
+            <div class="camp-metric-val" style="color:var(--gray-500);">0</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">Status</div>
+            <div class="camp-metric-val" style="font-size:0.7rem;color:#93c5fd;">Aguard.</div>
+          </div>
+          <div class="camp-metric">
+            <div class="camp-metric-label">ViewContent</div>
+            <div class="camp-metric-val" style="color:var(--blue);">249↑</div>
+          </div>
+        </div>
+        <div class="camp-footer">
+          <span class="camp-objective">🔗 LINK_CLICKS (LP Views)</span>
+          <span class="camp-budget-pill">💰 R$30/dia</span>
+          <span style="color:#93c5fd;font-size:0.68rem;font-weight:600;">🔵 4 ads em distribuição</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ADS TABLE ────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">🎨 Performance por Anúncio · Últimos 30 dias</div>
+    <div class="ads-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Anúncio</th>
+            <th>Status</th>
+            <th>Gasto</th>
+            <th>Impressões</th>
+            <th>CTR</th>
+            <th>CPC</th>
+            <th>CPM</th>
+            <th>ROAS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- BOF ADS -->
+          <tr>
+            <td>
+              <div class="ad-name">1166 Skills Quantidade v3 <span class="tag-winner">⭐ Vencedor</span></div>
+              <div class="ad-name-sub">ID: 52549352902611</div>
+            </td>
+            <td><span class="status-pill status-paused"><span class="status-dot"></span>Pausado</span></td>
+            <td class="num">R$102,78</td>
+            <td class="num">1.740</td>
+            <td class="num" style="color:var(--green);">3,16%</td>
+            <td class="num">R$1,87</td>
+            <td class="num">R$59,07</td>
+            <td class="num roas-bad">0,78x</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ad-name">1166 Skills R$97 Feed v1</div>
+              <div class="ad-name-sub">ID: 52551825294211</div>
+            </td>
+            <td><span class="status-pill status-active"><span class="status-dot"></span>Ativo</span></td>
+            <td class="num">R$85,11</td>
+            <td class="num">849</td>
+            <td class="num" style="color:var(--orange);">2,59%</td>
+            <td class="num">R$3,87</td>
+            <td class="num">R$100,25</td>
+            <td class="num roas-na">—</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ad-name">PT-BR Nativo</div>
+              <div class="ad-name-sub">ID: 52546795703811</div>
+            </td>
+            <td><span class="status-pill status-unknown"><span class="status-dot"></span>—</span></td>
+            <td class="num">R$36,95</td>
+            <td class="num">470</td>
+            <td class="num" style="color:var(--green);">3,19%</td>
+            <td class="num">R$2,46</td>
+            <td class="num">R$78,62</td>
+            <td class="num roas-na">—</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ad-name">Oferta Valor v3</div>
+              <div class="ad-name-sub">ID: 52549352948011</div>
+            </td>
+            <td><span class="status-pill status-unknown"><span class="status-dot"></span>—</span></td>
+            <td class="num">R$23,28</td>
+            <td class="num">298</td>
+            <td class="num">2,35%</td>
+            <td class="num">R$3,33</td>
+            <td class="num">R$78,12</td>
+            <td class="num roas-na">—</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ad-name">Lucas Video — Oferta Valor v4</div>
+              <div class="ad-name-sub">ID: 52551065631211</div>
+            </td>
+            <td><span class="status-pill status-paused"><span class="status-dot"></span>Pausado</span></td>
+            <td class="num">R$17,43</td>
+            <td class="num">222</td>
+            <td class="num">3,15%</td>
+            <td class="num">R$2,49</td>
+            <td class="num">R$78,51</td>
+            <td class="num roas-na">—</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="ad-name">Oferta Principal <span class="tag-ctr">↑ CTR</span></div>
+              <div class="ad-name-sub">ID: 52546795689011</div>
+            </td>
+            <td><span class="status-pill status-unknown"><span class="status-dot"></span>—</span></td>
+            <td class="num">R$5,88</td>
+            <td class="num">77</td>
+            <td class="num" style="color:var(--teal);">5,19%</td>
+            <td class="num">R$1,47</td>
+            <td class="num">R$76,36</td>
+            <td class="num roas-na">—</td>
+          </tr>
+          <!-- TOF GROUP -->
+          <tr class="tof-group-row">
+            <td colspan="8" style="padding:8px 14px;">
+              🔵 TOF — 4 ads novos ativos (em distribuição): Transformação Casual · Objeção Plano Gratuito · Números 1166 · Dor Prompt Solto — cada um com R$0 gasto, aguardando 24-48h para Meta distribuir impressões.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:8px;font-size:0.68rem;color:var(--gray-600);">
+      * ROAS calculado pela Meta (janela de atribuição padrão). ROAS real estimado: <strong style="color:var(--gold);">1,71x</strong> (5 compras × R$97 / R$284,12 total gasto).
+    </div>
+  </div>
+
+  <!-- ── PIXEL + FINANCEIRO ──────────────────────────────── -->
+  <div class="section">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;" class="two-col">
+
+      <!-- Pixel Health -->
+      <div>
+        <div class="section-label">📡 Saúde do Pixel</div>
+        <div class="pixel-health-card">
+          <div class="pixel-id-row">
+            <span class="pixel-id-tag">1646840569956144</span>
+            <span style="font-size:0.7rem;color:var(--green);font-weight:600;">✓ FluxIA-LP</span>
+          </div>
+          <div class="health-check">
+            <span class="check-icon check-ok">✓</span>
+            <span>EMQ Purchase: <strong style="color:var(--green);">9,3/10</strong> — excelente (CAPI Kiwify)</span>
+          </div>
+          <div class="health-check">
+            <span class="check-icon check-warn">!</span>
+            <span>EMQ outros eventos: <strong style="color:var(--yellow);">6,1/10</strong> — client-side only (normal)</span>
+          </div>
+          <div class="health-check">
+            <span class="check-icon check-ok">✓</span>
+            <span>Domínios: <strong style="color:var(--green);">fluxia-skills-pack-lp.vercel.app</strong> ✓</span>
+          </div>
+          <div class="health-check">
+            <span class="check-icon check-ok">✓</span>
+            <span>CAPI Kiwify: <strong style="color:var(--green);">ativo</strong> — email + phone hash</span>
+          </div>
+          <div class="health-check">
+            <span class="check-icon check-ok">✓</span>
+            <span>ViewContent: <strong style="color:var(--green);">ativo desde 09/Jun</strong></span>
+          </div>
+
+          <div style="margin-top:14px;border-top:1px solid var(--border);padding-top:12px;">
+            <div style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-600);margin-bottom:8px;font-weight:700;">Eventos 7 dias</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center;">
+              <div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--white);">5</div>
+                <div style="font-size:0.6rem;color:var(--gray-500);">Purchase</div>
+              </div>
+              <div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--white);">87</div>
+                <div style="font-size:0.6rem;color:var(--gray-500);">Init.Chkt</div>
+              </div>
+              <div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--white);">263</div>
+                <div style="font-size:0.6rem;color:var(--gray-500);">ViewContent</div>
+              </div>
+              <div>
+                <div style="font-size:1.1rem;font-weight:800;color:var(--white);">650+</div>
+                <div style="font-size:0.6rem;color:var(--gray-500);">PageView</div>
+              </div>
+            </div>
+            <div style="margin-top:10px;">
+              <div style="font-size:0.65rem;color:var(--gray-600);margin-bottom:4px;">IC → Purchase (conv. rate 7 dias)</div>
+              <div class="emq-bar"><div class="emq-fill" style="width:5.7%;"></div></div>
+              <div style="font-size:0.68rem;color:var(--gray-400);margin-top:2px;">5/87 = <strong>5,7%</strong> — benchmark: 1-3% para produto digital</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financeiro -->
+      <div>
+        <div class="section-label">💰 Financeiro</div>
+        <div class="card" style="height:100%;">
+          <div class="financial-grid">
+            <div class="fin-card">
+              <div class="fin-label">Receita Atribuída</div>
+              <div class="fin-val" style="color:var(--green);">R$485</div>
+              <div class="fin-sub">5 × R$97,00</div>
+              <div class="fin-note">total pixel, todas fontes</div>
+            </div>
+            <div class="fin-card">
+              <div class="fin-label">Receita Ads (Meta)</div>
+              <div class="fin-val" style="color:var(--orange);">R$80</div>
+              <div class="fin-sub">ROAS 0,28x × R$284</div>
+              <div class="fin-note">janela atribuição Meta</div>
+            </div>
+            <div class="fin-card">
+              <div class="fin-label">Break-even</div>
+              <div class="fin-val">3,1%</div>
+              <div class="fin-sub">conv. rate necessária</div>
+              <div class="fin-note">R$97 / CPC R$2,56 / LP visits</div>
+            </div>
+            <div class="fin-card">
+              <div class="fin-label">Projeção 30d</div>
+              <div class="fin-val">R$1.500</div>
+              <div class="fin-sub">R$50/dia × 30</div>
+              <div class="fin-note">budget atual</div>
+            </div>
+            <div class="fin-card" style="grid-column:1/-1;">
+              <div class="fin-label">Margem por venda (estimativa)</div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;">
+                <div>
+                  <div style="font-size:0.7rem;color:var(--gray-500);">Preço venda</div>
+                  <div style="font-size:1rem;font-weight:700;color:var(--white);">R$97,00</div>
+                </div>
+                <div>
+                  <div style="font-size:0.7rem;color:var(--gray-500);">Custo Kiwify (~5%)</div>
+                  <div style="font-size:1rem;font-weight:700;color:var(--orange);">−R$4,85</div>
+                </div>
+                <div>
+                  <div style="font-size:0.7rem;color:var(--gray-500);">CAC médio</div>
+                  <div style="font-size:1rem;font-weight:700;color:var(--orange);">−R$142,06</div>
+                </div>
+                <div style="border-left:1px solid var(--border);padding-left:16px;">
+                  <div style="font-size:0.7rem;color:var(--gray-500);">Meta atual (CAC médio)</div>
+                  <div style="font-size:1rem;font-weight:700;color:var(--red);">−R$49,91</div>
+                </div>
+                <div>
+                  <div style="font-size:0.7rem;color:var(--gray-500);">Meta (CAC melhor ad)</div>
+                  <div style="font-size:1rem;font-weight:700;color:var(--green);">+R$40,15</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ALERTAS ────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">⚠️ Alertas Ativos</div>
+
+    <div class="alert alert-critical">
+      <span class="alert-emoji">🔴</span>
+      <div class="alert-body">
+        <div class="alert-title">Ad vencedor está PAUSADO — ação imediata recomendada</div>
+        <div class="alert-desc">
+          "1166 Skills Quantidade v3" (ID: 52549352902611) é o melhor ad da conta: CTR 3,16%, CPC R$1,87, ROAS 0,78x, 2 compras atribuídas, CAC R$51,39. Está com status <strong style="color:var(--orange);">PAUSADO</strong> enquanto um ad sem compras (Feed v1) roda gastando R$85 sem retorno. Verificar se há violação de política — se não houver, reativar imediatamente no BOF adset.
+        </div>
+        <span class="alert-action action-red">→ Verificar e reativar no Ads Manager</span>
+      </div>
+    </div>
+
+    <div class="alert alert-warning">
+      <span class="alert-emoji">📉</span>
+      <div class="alert-body">
+        <div class="alert-title">CTR do adset BOF em queda: −21,83%</div>
+        <div class="alert-desc">
+          O adset BOF "Interesse Amplo BR" está com tendência ruim de CTR — queda de 21,83%. Sinal de fadiga de criativo ou esgotamento do público de prospecting. O ad ativo atual (Feed v1) tem CPM R$100,25 — 70% acima do vencedor pausado (R$59,07). Considerar rotação de criativo ou expansão de público.
+        </div>
+        <span class="alert-action action-yellow">→ Esta semana: testar novo criativo ou expansão de público</span>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <span class="alert-emoji">🔵</span>
+      <div class="alert-body">
+        <div class="alert-title">TOF 4 ads novos aguardando distribuição (R$0 spend)</div>
+        <div class="alert-desc">
+          Os 4 ads do TOF (Transformação Casual, Objeção Plano Gratuito, Números 1166, Dor Prompt Solto) foram criados em 09/Jun e ainda não receberam impressões. Normal nas primeiras 24-48h — Meta está na fase de aprendizado de distribuição. O ViewContent já está disparando (249 hoje), então o pixel está alimentando o sinal de qualificação corretamente.
+        </div>
+        <span class="alert-action action-blue">→ Aguardar até 11/Jun para avaliar distribuição</span>
+      </div>
+    </div>
+
+    <div class="alert alert-success">
+      <span class="alert-emoji">✅</span>
+      <div class="alert-body">
+        <div class="alert-title">Funil de pixel funcionando corretamente</div>
+        <div class="alert-desc">
+          Pixel 1646840569956144 saudável: domínios allowlistados, CAPI Kiwify ativo (EMQ 9,3/10 em Purchase), ViewContent disparando desde 09/Jun (263 eventos acumulados). IC→Purchase rate de 5,7% é 2-5× acima da média de produtos digitais. O sinal está bom para otimização do TOF.
+        </div>
+        <span class="alert-action action-green">→ Nenhuma ação necessária — manter monitoramento</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── MILESTONES ──────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">🎯 Milestones do Funil</div>
+    <div class="card">
+
+      <div class="milestone ms-done">
+        <div class="milestone-header">
+          <div class="milestone-title"><span>✅</span> Primeira compra confirmada</div>
+          <div class="milestone-pct" style="color:var(--green);">100%</div>
+        </div>
+        <div class="milestone-track">
+          <div class="milestone-fill fill-green" style="width:100%;"></div>
+        </div>
+        <div class="milestone-sub">5 compras no pixel — produto validado ✓</div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-header">
+          <div class="milestone-title"><span>🛒</span> 10 compras → escalar BOF para R$30/dia</div>
+          <div class="milestone-pct">50%</div>
+        </div>
+        <div class="milestone-track">
+          <div class="milestone-fill fill-purple" style="width:50%;"></div>
+        </div>
+        <div class="milestone-sub">5 de 10 compras registradas no pixel</div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-header">
+          <div class="milestone-title"><span>📡</span> 500 ViewContent → criar campanha MOF retargeting</div>
+          <div class="milestone-pct">52,6%</div>
+        </div>
+        <div class="milestone-track">
+          <div class="milestone-fill fill-blue" style="width:52.6%;"></div>
+        </div>
+        <div class="milestone-sub">263 de 500 VC acumulados (estimativa: ~2 dias com ritmo atual)</div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-header">
+          <div class="milestone-title"><span>📈</span> ROAS Meta break-even 1,0x</div>
+          <div class="milestone-pct" style="color:var(--orange);">28%</div>
+        </div>
+        <div class="milestone-track">
+          <div class="milestone-fill" style="width:28%;background:linear-gradient(90deg,var(--red),var(--orange));"></div>
+        </div>
+        <div class="milestone-sub">ROAS atual 0,28x Meta atrib. / ROAS real estimado 1,71x (5 compras / spend)</div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-header">
+          <div class="milestone-title"><span>💎</span> R$1.000 receita gerada → aumentar preço para R$127</div>
+          <div class="milestone-pct">48,5%</div>
+        </div>
+        <div class="milestone-track">
+          <div class="milestone-fill fill-gold" style="width:48.5%;"></div>
+        </div>
+        <div class="milestone-sub">R$485 de 5 compras / meta R$1.000 (com 10+ depoimentos → R$127-147)</div>
+      </div>
+
+      <div class="milestone">
+        <div class="milestone-header">
+          <div class="milestone-title"><span>🚀</span> ROAS > 2,0x → escalar para R$100/dia</div>
+          <div class="milestone-pct" style="color:var(--red);">14%</div>
+        </div>
+        <div class="milestone-track">
+          <div class="milestone-fill" style="width:14%;background:linear-gradient(90deg,#7c3aed,#a855f7);"></div>
+        </div>
+        <div class="milestone-sub">ROAS real estimado 1,71x de 2,0x alvo para escala agressiva</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PRÓXIMOS PASSOS ────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">📋 Próximos Passos · Visão de Especialista</div>
+    <div class="steps-list">
+
+      <div class="step-item">
+        <div class="step-num step-num-1">1</div>
+        <div class="step-body">
+          <div class="step-horizon h-urgente">🔴 Urgente — hoje</div>
+          <div class="step-title">Verificar e reativar ad vencedor pausado</div>
+          <div class="step-desc">
+            "1166 Skills Quantidade v3" (ID: 52549352902611) está PAUSADO mas é o único ad com compras atribuídas (2), melhor CTR (3,16%), CPC mais baixo (R$1,87) e menor CPM (R$59,07). Ir no Ads Manager → verificar se há política violada → se não houver, reativar no adset BOF. Considerar pausar "1166 Skills R$97 Feed v1" que está ativo mas com 0 compras, CPM R$100 e CPC R$3,87.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num step-num-2">2</div>
+        <div class="step-body">
+          <div class="step-horizon h-hoje">🟡 Hoje — monitorar</div>
+          <div class="step-title">Aguardar distribuição dos 4 ads TOF</div>
+          <div class="step-desc">
+            Os 4 ads criados em 09/Jun ainda não receberam impressões. Aguardar até 11/Jun (24-48h) e então avaliar qual deles está recebendo mais impressões, menor CPM e melhor CTR. Manter os 2 melhores, pausar os 2 piores. Objetivo: alimentar funil com visitantes qualificados para ViewContent → audiência de retargeting MOF.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num step-num-3">3</div>
+        <div class="step-body">
+          <div class="step-horizon h-semana">🔵 Esta semana</div>
+          <div class="step-title">Criar campanha MOF quando atingir 500 ViewContent</div>
+          <div class="step-desc">
+            Com ~263 VC acumulados e ~250/dia de ritmo atual, chegará a 500 VC em ~1-2 dias (estimativa ~12 Jun). Criar audiência customizada "ViewContent últimos 30 dias" + nova campanha MOF OUTCOME_SALES com copy de retargeting ("Você já conhece o FluxIA..."). Budget inicial: R$15/dia. Essa campanha tende a ter CPM menor e conversão maior pois atinge audiência quente.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num step-num-4">4</div>
+        <div class="step-body">
+          <div class="step-horizon h-semana">🟣 Esta semana</div>
+          <div class="step-title">Testar novo criativo para reverter queda de CTR no BOF</div>
+          <div class="step-desc">
+            CTR do adset BOF caiu -21,83% — sinal de fadiga. O ad ativo tem CPM 70% acima do vencedor. Criar 1 novo criativo focado em ângulo diferente (ex: "1.166 prompts organizados por área — tudo que o Claude precisa para trabalhar como profissional"). Subir como novo ad no adset BOF (PAUSED), testar por 3-5 dias com gasto mínimo, comparar CTR e CPC.
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num step-num-5">5</div>
+        <div class="step-body">
+          <div class="step-horizon h-proximo">🟢 Próxima semana</div>
+          <div class="step-title">Escalar budget quando ROAS real > 1,5x por 7 dias consecutivos</div>
+          <div class="step-desc">
+            ROAS real estimado já em 1,71x (5 compras / R$284 spend). Meta: confirmar esse número com 7+ dias de dados consistentes. Quando confirmado, aumentar BOF de R$20 para R$30/dia (+50%). Aumentar TOF de R$30 para R$40/dia. Não aumentar mais de 20-30% por semana para não sair da fase de aprendizado do Meta. Objetivo: R$100/dia quando ROAS > 2,0x.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── RODAPÉ ──────────────────────────────────────────── -->
+  <div class="footer">
+    <p>
+      Dashboard gerado por <strong>Claude</strong> · Dados ao vivo via Meta Ads API · Atualizado em <strong>10 Jun 2026</strong>
+    </p>
+    <p style="margin-top:6px;">
+      Para atualizar com dados mais recentes: abra o Claude e diga <strong>"atualiza o dashboard"</strong>
+    </p>
+    <p style="margin-top:6px;">
+      <a href="https://fluxia-skills-pack-lp.vercel.app" target="_blank">↗ Landing Page</a>
+      &nbsp;·&nbsp;
+      <a href="https://business.facebook.com/adsmanager" target="_blank">↗ Ads Manager</a>
+      &nbsp;·&nbsp;
+      <a href="https://business.facebook.com/events_manager" target="_blank">↗ Events Manager</a>
+    </p>
+  </div>
+
+</div><!-- /container -->
+
+<style>
+  @media (max-width: 700px) {
+    .two-col { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script>
+  // Current time BRT
+  function updateTime() {
+    const now = new Date();
+    const brt = new Intl.DateTimeFormat('pt-BR', {
+      hour: '2-digit', minute: '2-digit',
+      timeZone: 'America/Sao_Paulo'
+    }).format(now);
+    const el = document.getElementById('current-time');
+    if (el) el.textContent = brt;
+  }
+  updateTime();
+  setInterval(updateTime, 30000);
+
+  // Animate progress bars on load
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.milestone-fill, .funnel-bar-fill, .emq-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      setTimeout(() => { el.style.width = w; }, 100);
+    });
+  });
+</script>
+</body>
+</html>
