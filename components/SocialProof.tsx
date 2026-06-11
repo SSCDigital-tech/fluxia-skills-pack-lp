@@ -1,5 +1,4 @@
 import Reveal from './Reveal'
-import Counter from './Counter'
 
 const proofPoints = [
   {
@@ -51,11 +50,11 @@ export default function SocialProof() {
         <Reveal delay={200}>
           <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto text-center mb-10">
             <div>
-              <div className="text-4xl font-extrabold gradient-text mb-1"><Counter to={1166} /></div>
+              <div className="text-4xl font-extrabold gradient-text mb-1">1.166</div>
               <div className="text-sm text-gray-500">skills profissionais</div>
             </div>
             <div>
-              <div className="text-4xl font-extrabold gradient-text mb-1"><Counter to={14} /></div>
+              <div className="text-4xl font-extrabold gradient-text mb-1">14</div>
               <div className="text-sm text-gray-500">categorias de negócio</div>
             </div>
             <div>
