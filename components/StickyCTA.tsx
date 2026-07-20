@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { buildCheckoutUrl } from '../lib/tracking'
 
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
@@ -8,7 +9,7 @@ function trackCheckout() {
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
-      value: 97.00,
+      value: 77.00,
       currency: 'BRL',
       content_name: 'FluxIA Skills Pack',
       content_type: 'product',
@@ -19,11 +20,16 @@ function trackCheckout() {
 
 export default function StickyCTA() {
   const [show, setShow] = useState(false)
+  const [checkoutHref, setCheckoutHref] = useState(CHECKOUT_URL)
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.9)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setCheckoutHref(buildCheckoutUrl(CHECKOUT_URL))
   }, [])
 
   if (!show) return null
@@ -35,12 +41,12 @@ export default function StickyCTA() {
         <p className="text-gray-500 text-xs">1.166 skills · acesso vitalício</p>
       </div>
       <a
-        href={CHECKOUT_URL}
+        href={checkoutHref}
         onClick={trackCheckout}
         className="inline-flex items-center gap-2 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-sm px-5 py-3 rounded-xl transition-all duration-200 flex-shrink-0"
         target="_blank" rel="noopener noreferrer"
       >
-        Quero — <span className="text-[#facc15]">R$97</span>
+        Quero — <span className="text-[#facc15]">R$77</span>
       </a>
     </div>
   )

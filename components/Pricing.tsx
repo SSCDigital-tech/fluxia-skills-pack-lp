@@ -1,19 +1,31 @@
 'use client'
+import { useState, useCallback } from 'react'
 import Reveal from './Reveal'
+import { buildCheckoutUrl } from '../lib/tracking'
 
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
-function trackCheckout() {
+async function sha256(str: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str.trim().toLowerCase()))
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function trackCheckoutWithEmail(email: string) {
   type FbqWindow = Window & { fbq?: (...args: unknown[]) => void }
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
-    fbq('track', 'InitiateCheckout', {
-      value: 97.00,
+    const params: Record<string, unknown> = {
+      value: 77.00,
       currency: 'BRL',
       content_name: 'FluxIA Skills Pack',
       content_type: 'product',
       num_items: 1,
-    })
+    }
+    if (email) {
+      const hashed = await sha256(email)
+      params.em = hashed
+    }
+    fbq('track', 'InitiateCheckout', params)
   }
 }
 const valueRows = [
@@ -29,13 +41,29 @@ const bonuses = [
   { icon: '📅', name: 'Plano de 7 dias de uso', sub: 'Do zero à skill instalada em uma semana' },
 ]
 export default function Pricing() {
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState('')
+
+  const handleCheckout = useCallback(async (e: React.FormEvent) => {
+    e.preventDefault()
+    const trimmed = email.trim()
+    if (trimmed && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setError('Digite um email válido')
+      return
+    }
+    setError('')
+    await trackCheckoutWithEmail(trimmed)
+    const url = buildCheckoutUrl(CHECKOUT_URL, trimmed ? { email: trimmed } : undefined)
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }, [email])
+
   return (
-    <section className="py-24 px-4 bg-[#0a0a0a]">
+    <section className="py-24 px-4 bg-[#0a0a0a]" id="oferta">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-14">
           <div className="badge mb-6">Oferta de lançamento</div>
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-            Tudo isso por <span className="gradient-text-gold">R$97</span>
+            Tudo isso por <span className="gradient-text-gold">R$77</span>
           </h2>
           <p className="text-gray-400">Pagamento único. Sem mensalidade. Acesso vitalício.</p>
           <div className="inline-flex items-center gap-2 mt-4 bg-[#facc15]/8 border border-[#facc15]/20 rounded-full px-4 py-2 text-sm text-[#facc15] font-medium">
@@ -97,21 +125,30 @@ export default function Pricing() {
               <div className="text-right">
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-[#facc15]">R$</span>
-                  <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}>97</span>
+                  <span className="text-6xl font-extrabold text-[#facc15] leading-none" style={{textShadow:'0 0 30px rgba(250,204,21,0.3)'}}>77</span>
                 </div>
-                <p className="text-gray-400 text-xs">ou 12x R$8,97 no cartão**</p>
+                <p className="text-gray-400 text-xs">ou 12x R$7,96 no cartão**</p>
               </div>
             </div>
           </div>
 
-          <a
-            href={CHECKOUT_URL}
-            onClick={trackCheckout}
-            className="block w-full text-center bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl py-5 rounded-2xl transition-all duration-200 hover:scale-105 pulse-glow"
-            target="_blank" rel="noopener noreferrer"
-          >
-            🚀 Quero minhas skills agora — R$97
-          </a>
+          <form onSubmit={handleCheckout} className="space-y-3">
+            <label className="block text-sm text-gray-400 mb-1">Para onde enviamos seu acesso?</label>
+            <input
+              type="email"
+              placeholder="seu@email.com"
+              value={email}
+              onChange={e => { setEmail(e.target.value); setError('') }}
+              className="w-full bg-[#0a0a0a] border border-[#2a2a2a] focus:border-[#7c3aed] text-white rounded-xl px-5 py-4 text-base outline-none transition-colors placeholder:text-gray-600"
+            />
+            {error && <p className="text-red-400 text-xs">{error}</p>}
+            <button
+              type="submit"
+              className="block w-full text-center bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl py-5 rounded-2xl transition-all duration-200 hover:scale-105 pulse-glow cursor-pointer"
+            >
+              🚀 Quero minhas skills agora — R$77
+            </button>
+          </form>
           <p className="text-center text-gray-400 text-sm mt-4">
             Acesso imediato · Garantia de 7 dias · Pagamento 100% seguro via Kiwify
           </p>

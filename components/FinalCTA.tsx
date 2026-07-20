@@ -1,4 +1,7 @@
 'use client'
+import { useEffect, useState } from 'react'
+import { buildCheckoutUrl } from '../lib/tracking'
+
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
 function trackCheckout() {
@@ -6,7 +9,7 @@ function trackCheckout() {
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
-      value: 97.00,
+      value: 77.00,
       currency: 'BRL',
       content_name: 'FluxIA Skills Pack',
       content_type: 'product',
@@ -16,6 +19,10 @@ function trackCheckout() {
 }
 
 export default function FinalCTA() {
+  const [checkoutHref, setCheckoutHref] = useState(CHECKOUT_URL)
+  useEffect(() => {
+    setCheckoutHref(buildCheckoutUrl(CHECKOUT_URL))
+  }, [])
   return (
     <section className="py-24 px-4 relative overflow-hidden" style={{background:'linear-gradient(135deg,#0d0818 0%,#0a0a0a 60%)'}}>
       <div className="absolute inset-0 bg-[#7c3aed]/8 blur-[200px] rounded-full w-[800px] h-[400px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
@@ -31,13 +38,13 @@ export default function FinalCTA() {
         </p>
         <div className="flex flex-col items-center gap-5">
           <a
-            href={CHECKOUT_URL}
+            href={checkoutHref}
             onClick={trackCheckout}
             className="inline-flex items-center gap-4 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl px-14 py-7 rounded-2xl transition-all duration-200 pulse-glow hover:scale-105"
             target="_blank" rel="noopener noreferrer"
           >
             Quero minhas skills agora
-            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-4 py-1.5 rounded-lg">R$97</span>
+            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-4 py-1.5 rounded-lg">R$77</span>
           </a>
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-400">
             <span>🔒 Pagamento seguro</span>

@@ -60,7 +60,7 @@ export default function Trust() {
             Os resultados apresentados dependem do esforço e aplicação individual de cada usuário. Este produto não garante resultados financeiros.
           </p>
           <p className="text-xs text-gray-600 text-center">
-            © {new Date().getFullYear()} SSCDigital. Todos os direitos reservados. CNPJ em processo de abertura.
+            © {new Date().getFullYear()} SSCDigital. Todos os direitos reservados.
           </p>
         </div>
       </div>

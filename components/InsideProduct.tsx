@@ -42,6 +42,7 @@ export default function InsideProduct() {
                   alt={s.alt}
                   width={1080}
                   height={1080}
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full h-auto"
                 />
                 <figcaption className="text-sm text-gray-400 text-center px-4 py-3">

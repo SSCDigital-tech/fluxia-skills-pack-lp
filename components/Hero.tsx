@@ -1,5 +1,6 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { buildCheckoutUrl } from '../lib/tracking'
 
 const CHECKOUT_URL = process.env.NEXT_PUBLIC_KIWIFY_CHECKOUT_URL || 'https://pay.kiwify.com.br/L9dlZIF'
 
@@ -9,7 +10,7 @@ function trackCheckout() {
   const fbq = (window as FbqWindow).fbq
   if (typeof fbq === 'function') {
     fbq('track', 'InitiateCheckout', {
-      value: 97.00,
+      value: 77.00,
       currency: 'BRL',
       content_name: 'FluxIA Skills Pack',
       content_type: 'product',
@@ -19,6 +20,10 @@ function trackCheckout() {
 }
 
 export default function Hero() {
+  const [checkoutHref, setCheckoutHref] = useState(CHECKOUT_URL)
+  useEffect(() => {
+    setCheckoutHref(buildCheckoutUrl(CHECKOUT_URL))
+  }, [])
   useEffect(() => {
     // ViewContent — sinaliza ao pixel que o visitante visualizou o produto
     // Alimenta o TOF (LANDING_PAGE_VIEWS) e cria audiência de interesse
@@ -28,7 +33,7 @@ export default function Hero() {
         content_name: 'FluxIA Skills Pack',
         content_ids: ['fluxia-skills-pack'],
         content_type: 'product',
-        value: 97.00,
+        value: 77.00,
         currency: 'BRL',
       })
     }
@@ -48,7 +53,7 @@ export default function Hero() {
         </div>
 
         {/* Headline */}
-        <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.0] tracking-tight mb-6">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-6">
           <span className="text-white">Prompt solto</span><br />
           <span className="text-[#6b7280]">= resultado solto.</span><br />
           <span className="gradient-text">Instale método</span>{' '}
@@ -75,13 +80,13 @@ export default function Hero() {
         {/* CTA */}
         <div className="flex flex-col items-center gap-4 mb-10">
           <a
-            href={CHECKOUT_URL}
+            href={checkoutHref}
             onClick={trackCheckout}
             className="inline-flex items-center gap-4 bg-[#7c3aed] hover:bg-[#6d28d9] text-white font-bold text-xl px-12 py-6 rounded-2xl transition-all duration-200 pulse-glow hover:scale-105"
             target="_blank" rel="noopener noreferrer"
           >
             Quero minhas skills agora
-            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-3 py-1 rounded-lg">R$97</span>
+            <span className="bg-[#facc15] text-[#0a0a0a] text-lg font-extrabold px-3 py-1 rounded-lg">R$77</span>
           </a>
           <div className="flex flex-wrap items-center justify-center gap-5 text-sm text-gray-400">
             <span>🔒 Pagamento 100% seguro</span>
@@ -114,7 +119,7 @@ export default function Hero() {
             </div>
             <div className="bg-[#1a1a1a] rounded-xl px-4 py-4 text-sm text-gray-200 leading-relaxed">
               <span className="text-[#22c55e] font-semibold text-xs uppercase tracking-wider block mb-2">→ Output profissional</span>
-              "Você ainda usa o Claude com prompts soltos? É por isso que as respostas saem genéricas. Com o FluxIA, você instala um fluxo profissional e o Claude passa a entregar resultado de especialista — copy, estratégia, análise. Tudo em PT-BR. R$97 único. Comente FLUXO."
+              "Você ainda usa o Claude com prompts soltos? É por isso que as respostas saem genéricas. Com o FluxIA, você instala um fluxo profissional e o Claude passa a entregar resultado de especialista — copy, estratégia, análise. Tudo em PT-BR."
             </div>
           </div>
         </div>
